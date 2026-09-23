@@ -18,8 +18,60 @@ covers data engineering, analysis and machine learning:
 > **v2 is a rewrite.** The original school project lives in [`legacy/`](legacy/).
 > The section [What changed since v1](#what-changed-since-v1) explains why.
 
-All numbers and figures come from running the pipeline. See
-[`reports/REPORT.md`](reports/REPORT.md) after `make all`.
+All numbers and figures below come from running the pipeline
+(`make all`). The full generated report is
+[`reports/REPORT.md`](reports/REPORT.md), and the exact input files
+(URL, release, SHA-256) are listed in
+[`reports/data_manifest.json`](reports/data_manifest.json).
+
+## Results at a glance
+
+*DrugCombDB `drugcombs_scored.csv` × DepMap 24Q4 Public, 3 folds per split
+strategy.*
+
+| | |
+|---|---|
+| Raw measurements → modelling rows | 498 865 → **387 846** (drug pair × cell line) |
+| Drug names → unique molecules | 5 347 → **4 188** (99.9 % of measurements have a structure) |
+| Cell lines matched to DepMap | 105 of 119 human lines (83 % of measurements); 3 malaria strains excluded |
+| Synergistic (ZIP > 10) / antagonistic (ZIP < −10) | 5.4 % / 9.5 % |
+| Pairs tested in only one cell line | 87 % |
+| Replicate agreement (a ceiling for any model) | Pearson r = **0.69** |
+
+| Split | Best model | Pearson r | R² | AUPRC (synergy; prevalence 0.054) |
+|---|---|---|---|---|
+| Random rows | LightGBM + screen history | **0.63** | 0.40 | 0.47 |
+| Unseen drug pair | LightGBM + screen history | **0.57** | 0.33 | 0.34 |
+| Unseen drug | LightGBM, chemistry + biology¹ | **0.44** | 0.19 | 0.23 |
+| Unseen cell line | Screen-history baseline² | **0.48** | 0.15 | 0.25 |
+
+¹ Tied on r with the screen-history baseline (0.44), but much better calibrated
+(R² 0.19 against 0.05).
+² LightGBM with all features has a lower r (0.45) but the best R² (0.20).
+
+What this shows:
+
+* **On random rows the model is close to the noise ceiling.** r = 0.63,
+  against 0.69 for two replicate measurements of the same experiment.
+* **Most of that performance is memory of the screen.** The in-fold means per
+  drug, cell line and pair (the "screen history") carry about 60 % of the
+  model's gain. A plain ridge on those means gets within 0.02 of LightGBM.
+* **Generalisation is the hard part.** Performance falls from 0.63 to 0.44
+  for a drug the model has never seen. There the history features stop
+  helping (0.41 with them, 0.44 without), and chemistry (descriptors,
+  fingerprints, similarity) is what carries the prediction.
+* **Cell-line biology adds little on top of the drug features.** RNA principal
+  components receive under 1 % of the gain. With only about 90 screened lines,
+  the model gets most of the cell effect from each line's in-fold mean ZIP.
+* **The choice of synergy model matters.** ZIP correlates with Bliss at 0.92
+  but only 0.25 with Loewe.
+
+| | |
+|---|---|
+| ![Performance by split](reports/figures/ml_01_performance_by_split.png) | ![Replicate agreement](reports/figures/an_02_replicate_agreement.png) |
+| ![Cleaning funnel](reports/figures/de_01_data_funnel.png) | ![Entity resolution](reports/figures/de_02_entity_resolution.png) |
+| ![Synergy by lineage](reports/figures/an_04_synergy_by_lineage.png) | ![Top pairs](reports/figures/an_06_top_pairs.png) |
+| ![ZIP distribution](reports/figures/an_01_zip_distribution.png) | ![Cell-line landscape](reports/figures/an_07_cell_landscape.png) |
 
 ---
 
@@ -31,8 +83,8 @@ flowchart LR
         A[DrugCombDB<br/>drugcombs_scored.csv]
         B[DrugCombDB<br/>drug_chemical_info.csv]
         C[PubChem API]
-        D[DepMap<br/>Model.csv]
-        E[DepMap<br/>RNA-seq]
+        D[DepMap 24Q4<br/>Model.csv]
+        E[DepMap 24Q4<br/>RNA-seq]
     end
     A --> I[ingest<br/>typed staging + funnel]
     I --> R1[drugs<br/>name → SMILES → InChIKey]
@@ -175,8 +227,9 @@ several problems that make that number optimistic:
 6. The step that built the final modelling table was missing from the repo, so
    the results could not be reproduced.
 
-v2 fixes each of these. Expect lower but honest numbers on the harder splits.
-That gap is the main finding.
+v2 fixes each of these. On the same kind of random split, v2 reaches R² 0.40,
+not 0.52. More importantly, it measures how well the model generalises to
+unseen pairs, drugs and cell lines, which v1 could not do.
 
 ## Repository layout
 

@@ -61,8 +61,17 @@ def load_drugcombdb_info(path: Path) -> pd.DataFrame:
         if cid_col else np.nan
     )
     out.loc[out["cid"] <= 0, "cid"] = np.nan
-    out["smiles"] = info[smiles_col].where(info[smiles_col].astype(str).str.len() > 1) \
-        if smiles_col else None
+    missing = {"", "none", "nan", "null", "na", "n/a"}
+
+    def clean(col):
+        if col is None:
+            return None
+        v = info[col].astype(str).str.strip()
+        return v.where(~v.str.lower().isin(missing))
+
+    out["smiles"] = clean(smiles_col)
+    official_col = next((c for lc, c in lower.items() if "official" in lc), None)
+    out["official_name"] = clean(official_col).map(norm_drug) if official_col else None
     out = out.dropna(subset=["name_norm"]).drop_duplicates("name_norm")
     return out
 
@@ -78,6 +87,12 @@ def name_variants(name: str) -> list[str]:
     return variants
 
 
+def display_name(name: str) -> str:
+    """Human-readable name: drop salt/hydrate words and trailing "(alias)"."""
+    variants = name_variants(name)
+    return variants[1] if len(variants) > 1 else name
+
+
 class PubChem:
     """Tiny PUG-REST client: rate-limited (PubChem allows 5 req/s), retried on
     "server busy", parallel for name lookups, and cached on disk so reruns
@@ -89,7 +104,7 @@ class PubChem:
         self.timeout = cfg.get("timeout_s", 30)
         self.workers = cfg.get("workers", 3)
         self.cache_path = cache_path
-        self.cache = {"name2cid": {}, "cid2smiles": {}}
+        self.cache = {"name2cid": {}, "cid2smiles": {}, "cid2title": {}}
         if cache_path.exists():
             self.cache.update(json.loads(cache_path.read_text()))
         self.session = requests.Session()
@@ -169,6 +184,18 @@ class PubChem:
                     break
         return {c: self.cache["cid2smiles"].get(str(c)) for c in cids}
 
+    def cids_to_titles(self, cids: list[int], batch: int = 100) -> dict[int, str | None]:
+        todo = [c for c in dict.fromkeys(cids) if str(c) not in self.cache["cid2title"]]
+        for i in range(0, len(todo), batch):
+            chunk = ",".join(map(str, todo[i:i + batch]))
+            r = self._get(f"{self.base}/compound/cid/property/Title/JSON", "POST",
+                          data={"cid": chunk})
+            if r is not None and r.status_code == 200:
+                for p in r.json().get("PropertyTable", {}).get("Properties", []):
+                    self.cache["cid2title"][str(p["CID"])] = p.get("Title")
+        self.save()
+        return {c: self.cache["cid2title"].get(str(c)) for c in cids}
+
 
 # --------------------------------------------------------------------------- chemistry
 def standardise(smiles: str | None):
@@ -220,9 +247,10 @@ def resolve(names: pd.Series, info: pd.DataFrame | None, pubchem: PubChem | None
     """names: normalised drug names with measurement counts as values (index = name)."""
     res = pd.DataFrame({"name_norm": names.index, "n_measurements": names.values})
     res["cid"], res["smiles_raw"], res["resolution"] = np.nan, None, "unresolved"
+    res["official_name"] = None
 
     if info is not None:
-        res = res.drop(columns=["cid", "smiles_raw"]).merge(
+        res = res.drop(columns=["cid", "smiles_raw", "official_name"]).merge(
             info.rename(columns={"smiles": "smiles_raw"}), on="name_norm", how="left")
         res.loc[res["smiles_raw"].notna(), "resolution"] = "drugcombdb"
 
@@ -239,6 +267,24 @@ def resolve(names: pd.Series, info: pd.DataFrame | None, pubchem: PubChem | None
     return res
 
 
+_READABLE = r"[A-Za-z][A-Za-z0-9 \-]{2,30}"
+
+
+def canonical_names(names: pd.Series, pubchem: PubChem) -> pd.Series:
+    """Upgrade display names to PubChem's record title found *by name*.
+
+    Looking the name up (rather than the structure) lands on the main record,
+    e.g. "vepesid j" -> Etoposide, "lyovac-cosmegen" -> Dactinomycin. Titles
+    that are not short readable names (IUPAC strings, IDs) are ignored.
+    """
+    cids = pubchem.names_to_cids(names.dropna().unique().tolist())
+    titles = pubchem.cids_to_titles([c for c in cids.values() if c])
+    by_name = {n: titles.get(c) for n, c in cids.items() if c}
+    title = names.map(by_name)
+    title = title.where(title.astype(str).str.fullmatch(_READABLE)).str.lower()
+    return title.fillna(names)
+
+
 def build_dimension(res: pd.DataFrame, radius: int, n_bits: int):
     """Standardise structures, merge synonyms, return (dim_drug, bridge, fingerprints)."""
     std = [standardise(s) for s in res["smiles_raw"]]
@@ -252,9 +298,12 @@ def build_dimension(res: pd.DataFrame, radius: int, n_bits: int):
 
     bridge = res[["name_norm", "drug_key", "resolution"]].copy()
 
+    # display name: DrugCombDB official name of the most-measured synonym, else that
+    # synonym (``run`` upgrades it to PubChem's canonical title when available)
     res = res.sort_values("n_measurements", ascending=False)
+    res["display"] = res["official_name"].fillna(res["name_norm"]).map(display_name)
     dim = res.groupby("drug_key", sort=False).agg(
-        drug_name=("name_norm", "first"),
+        drug_name=("display", "first"),
         synonyms=("name_norm", lambda s: " | ".join(sorted(s))),
         n_synonyms=("name_norm", "size"),
         n_measurements=("n_measurements", "sum"),
@@ -296,6 +345,8 @@ def run(cfg: dict, paths: Paths) -> None:
     res = resolve(names, info, pubchem)
     fcfg = cfg["features"]
     dim, bridge, fp = build_dimension(res, fcfg["morgan_radius"], fcfg["morgan_bits"])
+    if pubchem is not None:
+        dim["drug_name"] = canonical_names(dim["drug_name"], pubchem)
     dim.to_parquet(paths.dim_drug, index=False)
     bridge.to_parquet(paths.processed / "bridge_drug_name.parquet", index=False)
     fp.to_parquet(paths.drug_fingerprints, index=False)

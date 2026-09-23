@@ -86,6 +86,8 @@ def build_report(paths: Paths) -> str:
 
 def run(cfg: dict, paths: Paths) -> None:
     paths.ensure()
+    if paths.manifest.exists():  # versioned copy of the provenance record
+        (paths.reports / "data_manifest.json").write_text(paths.manifest.read_text())
     text = build_report(paths)
     (paths.reports / "REPORT.md").write_text(text, encoding="utf-8")
     log.info("report written to %s", paths.reports / "REPORT.md")

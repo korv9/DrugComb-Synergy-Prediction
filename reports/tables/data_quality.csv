@@ -1,0 +1,11 @@
+check,passed,detail
+"fact grain is unique (drug_1, drug_2, cell_key)",True,0 duplicates
+drug pairs are canonically ordered,True,
+no self-combinations,True,
+ZIP has no missing values,True,0 missing
+every drug_key exists in dim_drug,True,
+every cell_key exists in dim_cell,True,
+dim_drug key is unique,True,
+dim_cell key is unique,True,
+rows with structures for both drugs,True,99.7%
+rows with DepMap RNA for the cell line,True,71.4%

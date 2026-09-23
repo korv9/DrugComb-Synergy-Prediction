@@ -1,0 +1,38 @@
+[
+  {
+    "source": "depmap",
+    "file": "Model.csv",
+    "url": "https://ndownloader.figshare.com/files/51065297",
+    "release": "DepMap 24Q4 Public",
+    "bytes": 645696,
+    "sha256": "b7a0c1385e6cef30132b56aff61f1261d11e3f490490b355c430d32ee0dbdcfa",
+    "recorded_at": "2026-09-23T20:06:34+00:00"
+  },
+  {
+    "source": "depmap",
+    "file": "OmicsExpressionProteinCodingGenesTPMLogp1.csv",
+    "url": "https://ndownloader.figshare.com/files/51065489",
+    "release": "DepMap 24Q4 Public",
+    "bytes": 506628654,
+    "sha256": "2a71dc94110efcc0221eae821bb93a9f03b54bea16f005818911a09d33383d56",
+    "recorded_at": "2026-09-23T20:06:49+00:00"
+  },
+  {
+    "source": "drugcombdb",
+    "file": "drug_chemical_info.csv",
+    "url": "http://drugcombdb.denglab.org/download/drug_chemical_info.csv",
+    "release": null,
+    "bytes": 297674,
+    "sha256": "c5331cb8e5ec16b42844fac7ecd0922b14bb983223dd793781d95e5964d479a0",
+    "recorded_at": "2026-09-23T20:06:31+00:00"
+  },
+  {
+    "source": "drugcombdb",
+    "file": "drugcombs_scored.csv",
+    "url": "http://drugcombdb.denglab.org/download/drugcombs_scored.csv",
+    "release": null,
+    "bytes": 32289774,
+    "sha256": "e821d3662703c931852d77f237e1ad914659ff2f8b2515f032666271ee0b7302",
+    "recorded_at": "2026-09-23T20:06:31+00:00"
+  }
+]

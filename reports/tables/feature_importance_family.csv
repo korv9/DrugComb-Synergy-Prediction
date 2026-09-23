@@ -1,0 +1,41 @@
+scheme,model,family,gain
+cold_cell,lgbm_chem_bio,Biology: RNA expression PCs,0.11499962616369246
+cold_cell,lgbm_chem_bio,Biology: tissue lineage,0.10752391789022274
+cold_cell,lgbm_chem_bio,Chemistry: descriptors & similarity,0.2665522645318648
+cold_cell,lgbm_chem_bio,Chemistry: fingerprint bits,0.51092419141422
+cold_cell,lgbm_full,Biology: RNA expression PCs,0.0070742582941641765
+cold_cell,lgbm_full,Biology: tissue lineage,0.0012410354258778483
+cold_cell,lgbm_full,Chemistry: descriptors & similarity,0.1715989531405128
+cold_cell,lgbm_full,Chemistry: fingerprint bits,0.16747641369995656
+cold_cell,lgbm_full,Screen history: in-fold counts,0.07052757301131742
+cold_cell,lgbm_full,Screen history: in-fold mean ZIP,0.5820817664281712
+cold_drug,lgbm_chem_bio,Biology: RNA expression PCs,0.11434531842977774
+cold_drug,lgbm_chem_bio,Biology: tissue lineage,0.08205356639838009
+cold_drug,lgbm_chem_bio,Chemistry: descriptors & similarity,0.28429874434728414
+cold_drug,lgbm_chem_bio,Chemistry: fingerprint bits,0.519302370824558
+cold_drug,lgbm_full,Biology: RNA expression PCs,0.00792741339869907
+cold_drug,lgbm_full,Biology: tissue lineage,0.00128810683934643
+cold_drug,lgbm_full,Chemistry: descriptors & similarity,0.18484493141616187
+cold_drug,lgbm_full,Chemistry: fingerprint bits,0.16668887701407822
+cold_drug,lgbm_full,Screen history: in-fold counts,0.061316068808114944
+cold_drug,lgbm_full,Screen history: in-fold mean ZIP,0.5779346025235994
+cold_pair,lgbm_chem_bio,Biology: RNA expression PCs,0.11560334956687253
+cold_pair,lgbm_chem_bio,Biology: tissue lineage,0.09163967678194125
+cold_pair,lgbm_chem_bio,Chemistry: descriptors & similarity,0.27225768870380457
+cold_pair,lgbm_chem_bio,Chemistry: fingerprint bits,0.5204992849473816
+cold_pair,lgbm_full,Biology: RNA expression PCs,0.006281302978543909
+cold_pair,lgbm_full,Biology: tissue lineage,0.0011976080510214583
+cold_pair,lgbm_full,Chemistry: descriptors & similarity,0.17361006554796085
+cold_pair,lgbm_full,Chemistry: fingerprint bits,0.16249710926663052
+cold_pair,lgbm_full,Screen history: in-fold counts,0.06867147933068436
+cold_pair,lgbm_full,Screen history: in-fold mean ZIP,0.5877424348251589
+random,lgbm_chem_bio,Biology: RNA expression PCs,0.11547906451894763
+random,lgbm_chem_bio,Biology: tissue lineage,0.09178165059557834
+random,lgbm_chem_bio,Chemistry: descriptors & similarity,0.273039779721531
+random,lgbm_chem_bio,Chemistry: fingerprint bits,0.519699505163943
+random,lgbm_full,Biology: RNA expression PCs,0.006516243008270142
+random,lgbm_full,Biology: tissue lineage,0.001364642058258257
+random,lgbm_full,Chemistry: descriptors & similarity,0.1745233839300279
+random,lgbm_full,Chemistry: fingerprint bits,0.16193613507575835
+random,lgbm_full,Screen history: in-fold counts,0.06660235348248486
+random,lgbm_full,Screen history: in-fold mean ZIP,0.5890572424452005

@@ -3,7 +3,7 @@ import pandas as pd
 import pytest
 
 from drugsyn.download import resolve_depmap_release
-from drugsyn.drugs import name_variants, standardise
+from drugsyn.drugs import display_name, name_variants, standardise
 from drugsyn.features import history_features, tanimoto
 from drugsyn.ingest import norm_cell, norm_drug, stage_measurements
 from drugsyn.splits import make_folds
@@ -37,6 +37,9 @@ def test_salt_stripping_merges_structures():
 
 def test_name_variants_strip_salts():
     assert "imatinib" in name_variants("imatinib mesylate")
+    assert display_name("doxorubicin hydrochloride") == "doxorubicin"
+    assert display_name("carfilzomib (pr-171)") == "carfilzomib"
+    assert display_name("temozolomide") == "temozolomide"
 
 
 def test_tanimoto():

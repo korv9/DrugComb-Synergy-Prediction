@@ -313,7 +313,8 @@ def fig_performance(paths: Paths, ceiling: float | None) -> None:
                         color=INK_2)
     if ceiling is not None:
         ax.axhline(ceiling, color=INK, lw=0.9, ls=(0, (4, 3)))
-        ax.text(-0.45, ceiling, f"replicate agreement r = {ceiling:.2f}", ha="left",
+        ax.text(len(schemes) - 0.55, ceiling, f"replicate agreement r = {ceiling:.2f}",
+                ha="right",
                 va="center", fontsize=8.5, color=INK, zorder=4,
                 bbox={"facecolor": SURFACE, "edgecolor": "none", "pad": 2})
     ax.set_xticks(x, [SCHEME_LABELS[s] for s in schemes])
