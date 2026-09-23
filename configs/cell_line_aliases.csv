@@ -1,0 +1,15 @@
+alias,target,note
+7860,786o,786-O renal carcinoma
+colo320dm,colo320,
+efm192b,efm192b,
+hl60tb,hl60,
+lncap,lncapclonefgc,DepMap name of LNCaP
+mdamb435,mdamb435s,
+msto,msto211h,
+ovcar3,nihovcar3,
+pa1,pa1,
+u251,u251mg,
+uwb1289brca1,uwb1289brca1,
+3d7,EXCLUDE,Plasmodium falciparum strain (malaria screen) - not a human cell line
+dd2,EXCLUDE,Plasmodium falciparum strain
+hb3,EXCLUDE,Plasmodium falciparum strain
