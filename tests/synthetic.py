@@ -102,8 +102,7 @@ def write_raw(root: Path, seed: int = 0, n_rows: int = 3000) -> None:
     lin_code = model_df["OncotreeLineage"].astype("category").cat.codes.to_numpy()
     expr = rng.normal(3, 1, (len(model_df), len(genes))) + lin_code[:, None] * \
         rng.normal(0, 0.5, len(genes))[None, :]
-    expr_df = pd.DataFrame(expr.clip(0).round(4), columns=genes)
-    expr_df.insert(0, "IsDefaultEntryForModel", "Yes")
-    expr_df.insert(0, "ModelID", model_df["ModelID"])
-    expr_df.insert(0, "SequencingID", [f"CDS-{i:06d}" for i in range(len(model_df))])
-    expr_df.to_csv(root / "depmap" / "OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv")
+    # DepMap 24Q4 layout: ModelID in an unnamed first column
+    expr_df = pd.DataFrame(expr.clip(0).round(4), columns=genes, index=model_df["ModelID"])
+    expr_df.index.name = None
+    expr_df.to_csv(root / "depmap" / "OmicsExpressionProteinCodingGenesTPMLogp1.csv")

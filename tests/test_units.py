@@ -12,6 +12,8 @@ from drugsyn.splits import make_folds
 def test_name_normalisation():
     assert norm_drug("  5–FU ") == "5-fu"
     assert norm_drug(float("nan")) is None
+    assert norm_drug("5-fluoro-2\\'-deoxyuridine") == "5-fluoro-2'-deoxyuridine"
+    assert norm_drug("(+\\\\/-)-sulfinpyrazone") == "(+/-)-sulfinpyrazone"
     assert norm_cell("NCI-H460") == "ncih460"
     assert norm_cell("786-O") == "786o"
 

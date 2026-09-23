@@ -21,6 +21,7 @@ from .config import Paths
 log = logging.getLogger(__name__)
 
 CHUNK = 1 << 20
+HEADERS = {"User-Agent": "drugsyn/0.2 (research pipeline; +https://github.com/korv9)"}
 
 
 def sha256sum(path: Path) -> str:
@@ -34,7 +35,7 @@ def sha256sum(path: Path) -> str:
 def download_file(url: str, dest: Path, timeout: int = 60) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
-    with requests.get(url, stream=True, timeout=timeout) as resp:
+    with requests.get(url, stream=True, timeout=timeout, headers=HEADERS) as resp:
         resp.raise_for_status()
         with open(tmp, "wb") as fh:
             for block in resp.iter_content(CHUNK):
@@ -102,17 +103,34 @@ def resolve_depmap_release(index: pd.DataFrame, wanted: list[str], release: str 
     return chosen, dict(zip(rows[file_col], rows[url_col]))
 
 
+def figshare_files(article_id: int) -> tuple[str, dict[str, str]]:
+    """Return (article title, {filename: download_url}) for a Figshare article."""
+    api = f"https://api.figshare.com/v2/articles/{article_id}"
+    meta = requests.get(api, timeout=60, headers=HEADERS)
+    meta.raise_for_status()
+    files = requests.get(f"{api}/files", params={"page_size": 1000}, timeout=60, headers=HEADERS)
+    files.raise_for_status()
+    return meta.json()["title"], {f["name"]: f["download_url"] for f in files.json()}
+
+
 def download_depmap(cfg: dict, paths: Paths) -> list[dict]:
+    """DepMap via its official Figshare release (default) or the portal file index."""
     src = cfg["sources"]["depmap"]
     wanted = list(src["files"].values())
     dests = {name: paths.raw_file("depmap", name) for name in wanted}
     if all(d.exists() for d in dests.values()):
         return [_fetch("depmap", None, d, src.get("release")) for d in dests.values()]
 
-    resp = requests.get(src["files_index_url"], timeout=60)
-    resp.raise_for_status()
-    index = pd.read_csv(io.StringIO(resp.text))
-    release, urls = resolve_depmap_release(index, wanted, src.get("release"))
+    if src.get("provider", "figshare") == "figshare":
+        release, urls = figshare_files(src["figshare_article_id"])
+        missing = set(wanted) - set(urls)
+        if missing:
+            raise ValueError(f"Figshare article {src['figshare_article_id']} lacks {missing}")
+    else:  # the portal index sits behind bot verification for scripted clients
+        resp = requests.get(src["files_index_url"], timeout=60, headers=HEADERS)
+        resp.raise_for_status()
+        index = pd.read_csv(io.StringIO(resp.text))
+        release, urls = resolve_depmap_release(index, wanted, src.get("release"))
     log.info("[depmap] using release %s", release)
     return [_fetch("depmap", urls[name], dests[name], release) for name in wanted]
 

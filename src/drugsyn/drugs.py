@@ -16,7 +16,9 @@ from __future__ import annotations
 import json
 import logging
 import re
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from urllib.parse import quote
 
@@ -77,35 +79,54 @@ def name_variants(name: str) -> list[str]:
 
 
 class PubChem:
-    """Tiny PUG-REST client with a JSON cache so reruns never hit the API twice."""
+    """Tiny PUG-REST client: rate-limited (PubChem allows 5 req/s), retried on
+    "server busy", parallel for name lookups, and cached on disk so reruns
+    never hit the API twice and an interrupted run resumes where it stopped."""
 
     def __init__(self, cfg: dict, cache_path: Path):
         self.base = cfg["base_url"].rstrip("/")
-        self.sleep = cfg.get("sleep_s", 0.25)
+        self.min_interval = cfg.get("sleep_s", 0.25)
         self.timeout = cfg.get("timeout_s", 30)
+        self.workers = cfg.get("workers", 3)
         self.cache_path = cache_path
         self.cache = {"name2cid": {}, "cid2smiles": {}}
         if cache_path.exists():
             self.cache.update(json.loads(cache_path.read_text()))
         self.session = requests.Session()
         self.session.headers["User-Agent"] = "drugsyn/0.2 (drug-synergy research pipeline)"
+        self._lock = threading.Lock()
+        self._next_slot = 0.0
 
     def save(self) -> None:
         self.cache_path.parent.mkdir(parents=True, exist_ok=True)
-        self.cache_path.write_text(json.dumps(self.cache))
+        with self._lock:
+            text = json.dumps(self.cache)
+        self.cache_path.write_text(text)
 
-    def _get(self, url: str, **kw):
-        time.sleep(self.sleep)
-        try:
-            return self.session.request(kw.pop("method", "GET"), url, timeout=self.timeout, **kw)
-        except requests.RequestException as exc:
-            log.warning("PubChem request failed: %s", exc)
-            return None
+    def _wait_for_slot(self) -> None:
+        with self._lock:
+            now = time.monotonic()
+            slot = max(now, self._next_slot)
+            self._next_slot = slot + self.min_interval
+        time.sleep(max(0.0, slot - now))
+
+    def _get(self, url: str, method: str = "GET", **kw):
+        for attempt in range(6):
+            self._wait_for_slot()
+            try:
+                r = self.session.request(method, url, timeout=self.timeout, **kw)
+            except requests.RequestException as exc:
+                log.warning("PubChem request failed: %s", exc)
+                r = None
+            if r is not None and r.status_code not in (429, 503, 504):
+                return r
+            time.sleep(2 ** attempt)
+        return r
 
     def name_to_cid(self, name: str) -> int | None:
         if name in self.cache["name2cid"]:
             return self.cache["name2cid"][name]
-        cid = None
+        cid, definitive = None, True
         for q in name_variants(name):
             r = self._get(f"{self.base}/compound/name/{quote(q, safe='')}/cids/JSON")
             if r is not None and r.status_code == 200:
@@ -113,8 +134,26 @@ class PubChem:
                 if cids:
                     cid = int(cids[0])
                     break
-        self.cache["name2cid"][name] = cid
+            elif r is None or r.status_code != 404:
+                definitive = False  # server busy / network error: not a real miss
+        if cid is not None or definitive:  # never cache a transient failure
+            with self._lock:
+                self.cache["name2cid"][name] = cid
         return cid
+
+    def names_to_cids(self, names: list[str]) -> dict[str, int | None]:
+        for attempt in range(3):  # later passes retry names that hit transient errors
+            todo = [n for n in names if n not in self.cache["name2cid"]]
+            if not todo:
+                break
+            log.info("PubChem name lookup (pass %d): %d cached, %d to query",
+                     attempt + 1, len(names) - len(todo), len(todo))
+            with ThreadPoolExecutor(self.workers if attempt == 0 else 1) as pool:
+                for i, _ in enumerate(pool.map(self.name_to_cid, todo), 1):
+                    if i % 200 == 0 or i == len(todo):
+                        self.save()
+                        log.info("  %d / %d names queried", i, len(todo))
+        return {n: self.cache["name2cid"].get(n) for n in names}
 
     def cids_to_smiles(self, cids: list[int], batch: int = 100) -> dict[int, str]:
         todo = [c for c in cids if str(c) not in self.cache["cid2smiles"]]
@@ -122,7 +161,7 @@ class PubChem:
             chunk = ",".join(map(str, todo[i:i + batch]))
             for props in ("SMILES,ConnectivitySMILES", "IsomericSMILES,CanonicalSMILES"):
                 r = self._get(f"{self.base}/compound/cid/property/{props}/JSON",
-                              method="POST", data={"cid": chunk})
+                              "POST", data={"cid": chunk})
                 if r is not None and r.status_code == 200:
                     for p in r.json().get("PropertyTable", {}).get("Properties", []):
                         smi = next((p[k] for k in _SMILES_KEYS if p.get(k)), None)
@@ -189,9 +228,8 @@ def resolve(names: pd.Series, info: pd.DataFrame | None, pubchem: PubChem | None
 
     if pubchem is not None:
         need_cid = res["smiles_raw"].isna() & res["cid"].isna()
-        log.info("PubChem name lookup for %d drugs", int(need_cid.sum()))
-        for i in res.index[need_cid]:
-            res.at[i, "cid"] = pubchem.name_to_cid(res.at[i, "name_norm"])
+        found = pubchem.names_to_cids(res.loc[need_cid, "name_norm"].tolist())
+        res.loc[need_cid, "cid"] = res.loc[need_cid, "name_norm"].map(found).astype(float)
         need_smiles = res["smiles_raw"].isna() & res["cid"].notna()
         cids = res.loc[need_smiles, "cid"].astype(int).tolist()
         smiles = pubchem.cids_to_smiles(cids)

@@ -14,7 +14,7 @@ there and still records their checksums.
 | DrugCombDB | `drugcombs_scored.csv` | `data/raw/drugcombdb/` | Drug pairs, cell lines, ZIP / Bliss / Loewe / HSA scores |
 | DrugCombDB | `drug_chemical_info.csv` | `data/raw/drugcombdb/` | Drug name → PubChem CID and SMILES |
 | DepMap | `Model.csv` | `data/raw/depmap/` | Cell-line identifiers, lineage, disease |
-| DepMap | `OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv` | `data/raw/depmap/` | RNA-seq log2(TPM+1), models × genes |
+| DepMap | `OmicsExpressionProteinCodingGenesTPMLogp1.csv` | `data/raw/depmap/` | RNA-seq log2(TPM+1), models × genes |
 | PubChem (API) | – | `data/interim/pubchem_cache.json` | Fallback name → CID → SMILES lookups |
 
 ## DrugCombDB
@@ -36,14 +36,18 @@ there and still records their checksums.
 
 ## DepMap
 
-* Portal: <https://depmap.org/portal/data_page/>. The pipeline reads the
-  machine-readable file index at `https://depmap.org/portal/api/download/files`
-  and, by default, picks the newest release that contains both files. Set
-  `sources.depmap.release` in the config (e.g. `"DepMap Public 25Q2"`) to pin a
-  release.
-* Newer releases prefix the expression matrix with metadata columns
-  (`SequencingID, ModelID, IsDefaultEntryForModel, …`). Older ones have the
-  ModelID in an unnamed first column. `cells.load_expression` handles both.
+* Default source: the official Broad release **DepMap 24Q4 Public** on
+  Figshare+ (<https://doi.org/10.25452/figshare.plus.27993248.v1>). The
+  pipeline lists the article's files through the Figshare API and downloads
+  them directly. Pinning a release keeps results reproducible. To use another
+  Figshare release, change `sources.depmap.figshare_article_id`.
+* Alternative: `provider: portal` reads the file index at
+  `https://depmap.org/portal/api/download/files`. At the time of writing, the
+  portal serves a browser verification page to scripted clients, so this mode
+  only works from an environment that has passed that check.
+* In 24Q4 the expression matrix has the ModelID in an unnamed first column.
+  Newer releases prefix it with metadata columns (`SequencingID, ModelID,
+  IsDefaultEntryForModel, …`). `cells.load_expression` handles both layouts.
 * DepMap data is released under CC BY 4.0. Cite the release you used.
 
 ## PubChem
@@ -56,5 +60,6 @@ properties in 2025 (`IsomericSMILES` → `SMILES`, `CanonicalSMILES` →
 
 ## Network access
 
-The pipeline needs outbound HTTPS to `drugcombdb.denglab.org`, `depmap.org`
-(which redirects to cloud storage for the files) and `pubchem.ncbi.nlm.nih.gov`.
+The pipeline needs outbound HTTP(S) to `drugcombdb.denglab.org`,
+`api.figshare.com` and `ndownloader.figshare.com` (which redirect to S3), and
+`pubchem.ncbi.nlm.nih.gov`.

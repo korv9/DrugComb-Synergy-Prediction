@@ -36,6 +36,7 @@ def norm_drug(name) -> str | None:
     if name is None or (isinstance(name, float) and np.isnan(name)):
         return None
     s = unicodedata.normalize("NFKC", str(name)).translate(_DASHES).translate(_ZERO_WIDTH)
+    s = s.replace("\\", "")  # DrugCombDB escapes quotes/slashes: 2\'-deoxy, (+\\/-)
     s = " ".join(s.strip().lower().split())
     return s or None
 
