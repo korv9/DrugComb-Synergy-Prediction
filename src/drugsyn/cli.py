@@ -9,6 +9,7 @@ import time
 from . import (
     build,
     cells,
+    diagnostics,
     download,
     drugs,
     figures,
@@ -31,6 +32,7 @@ STAGES = {
     "build": build.run,
     "warehouse": warehouse.run,
     "train": model.run,
+    "diagnose": diagnostics.run,
     "figures": figures.run,
     "report": report.run,
 }

@@ -107,8 +107,8 @@ def summarise(by_fold: pd.DataFrame) -> pd.DataFrame:
     return summary
 
 
-def run(cfg: dict, paths: Paths) -> None:
-    paths.ensure()
+def load_modeling_data(cfg: dict, paths: Paths) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Fact table (optionally subsampled) and its label-free feature matrix."""
     fact = pd.read_parquet(paths.fact)
     max_rows = cfg["model"].get("max_rows")
     if max_rows and len(fact) > max_rows:
@@ -126,7 +126,12 @@ def run(cfg: dict, paths: Paths) -> None:
         drug_cell=optional("drug_cell_targets.parquet"),
     )
     log.info("static feature matrix: %s", static.shape)
+    return fact, static
 
+
+def run(cfg: dict, paths: Paths) -> None:
+    paths.ensure()
+    fact, static = load_modeling_data(cfg, paths)
     by_fold, preds, imp = evaluate(fact, static, cfg)
     preds = preds.merge(fact[["drug_1", "drug_2", "cell_key", "pair_key"]],
                         left_on="row", right_index=True)

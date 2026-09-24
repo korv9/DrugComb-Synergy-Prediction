@@ -439,6 +439,92 @@ def fig_ablation(paths: Paths) -> None:
     _save(fig, paths, "ml_04_ablation")
 
 
+def fig_overfitting(paths: Paths) -> None:
+    lc, rounds = paths.tables / "eval_learning_curve.csv", paths.tables / "eval_boosting_rounds.csv"
+    if not lc.exists():
+        return
+    lc, rounds = pd.read_csv(lc), pd.read_csv(rounds)
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(10, 4))
+    for col, color, label in [("train_r", SERIES[1], "Training rows"),
+                              ("test_r", SERIES[0], "Unseen drug pairs")]:
+        a1.plot(lc["n_train"], lc[col], color=color, lw=2, marker="o", ms=7,
+                markeredgecolor=SURFACE, markeredgewidth=1.5, label=label)
+        a1.text(lc["n_train"].iloc[-1] * 1.12, lc[col].iloc[-1], f"{lc[col].iloc[-1]:.2f}",
+                va="center", fontsize=9)
+    a1.set_xscale("log")
+    a1.set_xlabel("Training rows (log scale)")
+    a1.set_ylabel("Pearson r")
+    a1.set_ylim(0, 1)
+    a1.set_title("Learning curve", fontsize=10.5)
+    a1.legend(loc="lower right")
+    for col, color, label in [("train_rmse", SERIES[1], "Training rows"),
+                              ("test_rmse", SERIES[0], "Unseen drug pairs")]:
+        a2.plot(rounds["round"], rounds[col], color=color, lw=2, label=label)
+    best = rounds.loc[rounds["test_rmse"].idxmin()]
+    a2.axvline(best["round"], color=MUTED, lw=0.8, ls=(0, (3, 3)))
+    a2.text(best["round"], a2.get_ylim()[1], f" best test round {int(best['round'])}",
+            va="top", fontsize=8.5, color=INK_2)
+    a2.set_xlabel("Boosting round")
+    a2.set_ylabel("RMSE (ZIP)")
+    a2.set_title("Boosting rounds", fontsize=10.5)
+    fig.suptitle("Overfitting check: training vs held-out drug pairs", x=0.02, ha="left",
+                 fontsize=12, weight="semibold", color=INK)
+    _save(fig, paths, "ml_05_overfitting")
+
+
+def fig_enrichment(paths: Paths) -> None:
+    p = paths.tables / "eval_enrichment.csv"
+    if not p.exists():
+        return
+    e = pd.read_csv(p)
+    e = e[e["model"] == "lgbm_all"]
+    schemes = [s for s in SCHEME_LABELS if s in set(e["scheme"])]
+    if not schemes:
+        return
+    fig, ax = plt.subplots(figsize=(8.5, 4.2))
+    x = np.arange(len(schemes))
+    tops = [0.01, 0.05]
+    width = 0.8 / (len(tops) + 1)
+    base = e.groupby("scheme")["base_rate"].first().reindex(schemes)
+    ax.bar(x - 0.4 + width * 0.5, base, width * 0.92, color=NEUTRAL, label="Random pick")
+    for i, (top, color) in enumerate(zip(tops, SERIES)):
+        sub = e[e["top_fraction"] == top].set_index("scheme").reindex(schemes)
+        xs = x - 0.4 + width * (i + 1.5)
+        ax.bar(xs, sub["hit_rate"], width * 0.92, color=color,
+               label=f"Model's top {top:.0%}")
+        for xv, v, en in zip(xs, sub["hit_rate"], sub["enrichment"]):
+            ax.text(xv, v + 0.01, f"{en:.1f}×", ha="center", fontsize=8, color=INK_2)
+    ax.set_xticks(x, [SCHEME_LABELS[s] for s in schemes])
+    ax.yaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
+    ax.set_ylabel("Share truly synergistic (ZIP > 10)")
+    ax.grid(axis="x", visible=False)
+    ax.legend(loc="upper left", bbox_to_anchor=(0, -0.1), ncol=3)
+    ax.set_title("Would the model help pick combinations to test?", pad=22)
+    _subtitle(ax, "Hit rate among top-ranked predictions within each screen; label = enrichment")
+    _save(fig, paths, "ml_06_enrichment")
+
+
+def fig_calibration(paths: Paths) -> None:
+    p = paths.tables / "eval_calibration.csv"
+    if not p.exists():
+        return
+    c = pd.read_csv(p)
+    schemes = [s for s in SCHEME_LABELS if s in set(c["scheme"])]
+    fig, ax = plt.subplots(figsize=(5.8, 5))
+    lo, hi = min(c["pred"].min(), c["obs"].min()), max(c["pred"].max(), c["obs"].max())
+    ax.plot([lo, hi], [lo, hi], color=INK_2, lw=0.8, ls=(0, (3, 3)))
+    for scheme, color in zip(schemes, SERIES):
+        g = c[c["scheme"] == scheme]
+        ax.plot(g["pred"], g["obs"], color=color, lw=2, marker="o", ms=6,
+                markeredgecolor=SURFACE, markeredgewidth=1.2, label=SCHEME_LABELS[scheme])
+    ax.set_xlabel("Mean predicted ZIP (decile)")
+    ax.set_ylabel("Mean observed ZIP")
+    ax.legend(loc="upper left")
+    ax.set_title("Calibration", pad=22)
+    _subtitle(ax, "Points on the diagonal = predictions mean what they say")
+    _save(fig, paths, "ml_07_calibration")
+
+
 def run(cfg: dict, paths: Paths) -> None:
     paths.ensure()
     _style()
@@ -455,6 +541,9 @@ def run(cfg: dict, paths: Paths) -> None:
         lambda: fig_feature_families(paths),
         lambda: fig_pred_vs_obs(paths),
         lambda: fig_ablation(paths),
+        lambda: fig_overfitting(paths),
+        lambda: fig_enrichment(paths),
+        lambda: fig_calibration(paths),
     ]
     ceiling = None
     try:

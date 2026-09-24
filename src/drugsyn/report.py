@@ -83,6 +83,17 @@ def build_report(paths: Paths) -> str:
         out.append(_fig(paths, "ml_02_feature_families", "Feature families"))
         out.append(_fig(paths, "ml_03_pred_vs_obs", "Predicted vs observed"))
         out.append(_fig(paths, "ml_04_ablation", "Ablation"))
+        out += ["## Model diagnostics", ""]
+        for name, alt in [("ml_05_overfitting", "Overfitting check"),
+                          ("ml_06_enrichment", "Enrichment"),
+                          ("ml_07_calibration", "Calibration")]:
+            out.append(_fig(paths, name, alt))
+        for table, title in [("eval_y_scramble.csv", "Y-scramble (leakage check)"),
+                             ("eval_by_study.csv", "Performance by study"),
+                             ("eval_enrichment.csv", "Enrichment of synergistic hits")]:
+            t = _read(paths, table)
+            if t is not None and len(t):
+                out += [f"### {title}", "", _md_table(t), ""]
     return "\n".join(out)
 
 
