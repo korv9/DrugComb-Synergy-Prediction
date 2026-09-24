@@ -1,0 +1,14 @@
+alias,target,note
+7860,786o,786-O renal carcinoma (DrugCombDB spells it with a zero)
+colo320dm,colo320,
+hl60tb,hl60,
+lncap,lncapclonefgc,DepMap name of LNCaP
+mdamb435,mdamb435s,
+msto,msto211h,
+ovcar3,nihovcar3,
+u251,u251mg,
+sr,sr786,NCI-60 leukemia line SR = SR-786
+ctr,smsctr,rhabdomyosarcoma SMS-CTR
+3d7,EXCLUDE,Plasmodium falciparum strain (malaria screen) - not a human cell line
+dd2,EXCLUDE,Plasmodium falciparum strain
+hb3,EXCLUDE,Plasmodium falciparum strain

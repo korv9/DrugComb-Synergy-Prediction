@@ -1,0 +1,8 @@
+step,rows
+raw rows,498865
+has drug & cell names,498855
+numeric ZIP score,498855
+"ZIP within [-100, 100]",498309
+two different molecules,497926
+human cell lines only,484846
+"unique (pair, cell line, study) after replicate mean",396498

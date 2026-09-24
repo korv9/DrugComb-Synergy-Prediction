@@ -1,0 +1,74 @@
+[
+  {
+    "source": "depmap",
+    "file": "CRISPRGeneEffect.csv",
+    "url": "https://ndownloader.figshare.com/files/51064667",
+    "release": "DepMap 24Q4 Public",
+    "bytes": 428678699,
+    "sha256": "3d8f3ec6dbf2db7ff834b79b508622ec0b226f3518003fe96ecf5a4fcf167e3b",
+    "recorded_at": "2026-09-24T04:10:45+00:00"
+  },
+  {
+    "source": "depmap",
+    "file": "Model.csv",
+    "url": "https://ndownloader.figshare.com/files/51065297",
+    "release": "DepMap 24Q4 Public",
+    "bytes": 645696,
+    "sha256": "b7a0c1385e6cef30132b56aff61f1261d11e3f490490b355c430d32ee0dbdcfa",
+    "recorded_at": "2026-09-24T04:10:01+00:00"
+  },
+  {
+    "source": "depmap",
+    "file": "OmicsExpressionProteinCodingGenesTPMLogp1.csv",
+    "url": "https://ndownloader.figshare.com/files/51065489",
+    "release": "DepMap 24Q4 Public",
+    "bytes": 506628654,
+    "sha256": "2a71dc94110efcc0221eae821bb93a9f03b54bea16f005818911a09d33383d56",
+    "recorded_at": "2026-09-24T04:10:31+00:00"
+  },
+  {
+    "source": "depmap",
+    "file": "OmicsSomaticMutationsMatrixDamaging.csv",
+    "url": "https://ndownloader.figshare.com/files/51065747",
+    "release": "DepMap 24Q4 Public",
+    "bytes": 147655356,
+    "sha256": "1b33be5c3bebf30f52421384e268016afbd5e2257b75d65cfe2c09e21daba0f9",
+    "recorded_at": "2026-09-24T04:10:50+00:00"
+  },
+  {
+    "source": "drugcombdb",
+    "file": "drug_chemical_info.csv",
+    "url": "http://drugcombdb.denglab.org/download/drug_chemical_info.csv",
+    "release": null,
+    "bytes": 297674,
+    "sha256": "c5331cb8e5ec16b42844fac7ecd0922b14bb983223dd793781d95e5964d479a0",
+    "recorded_at": "2026-09-24T03:43:23+00:00"
+  },
+  {
+    "source": "drugcombdb",
+    "file": "drug_protein_links.tsv",
+    "url": "http://drugcombdb.denglab.org/download/drug_protein_links.tsv",
+    "release": null,
+    "bytes": 745016311,
+    "sha256": "309c0af55cef4eebfebc3d0deec080da88f3efb7652c415bc664dacc02cb2736",
+    "recorded_at": "2026-09-24T04:09:59+00:00"
+  },
+  {
+    "source": "drugcombdb",
+    "file": "drugcombs_response.csv",
+    "url": "http://drugcombdb.denglab.org/download/drugcombs_response.csv",
+    "release": null,
+    "bytes": 685920301,
+    "sha256": "3f67aab5efc4df3ae60fc95122b6daf5016f6fde40abc1be115a9683ad69bf73",
+    "recorded_at": "2026-09-24T03:56:50+00:00"
+  },
+  {
+    "source": "drugcombdb",
+    "file": "drugcombs_scored.csv",
+    "url": "http://drugcombdb.denglab.org/download/drugcombs_scored.csv",
+    "release": null,
+    "bytes": 32289774,
+    "sha256": "e821d3662703c931852d77f237e1ad914659ff2f8b2515f032666271ee0b7302",
+    "recorded_at": "2026-09-24T03:43:23+00:00"
+  }
+]

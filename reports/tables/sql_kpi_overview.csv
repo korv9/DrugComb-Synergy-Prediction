@@ -1,0 +1,2 @@
+combinations,drug_pairs,drugs,cell_lines,lineages,mean_zip,share_synergistic,share_antagonistic,share_with_structures,share_with_rna
+396498,67570,4188,119,15,-1.58,0.0544,0.0945,0.9975,0.7171

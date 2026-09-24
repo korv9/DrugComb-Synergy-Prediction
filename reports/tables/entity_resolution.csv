@@ -1,0 +1,8 @@
+entity,method,names,measurement_share
+drug,drugcombdb,2565,0.8289535208073705
+drug,pubchem,2687,0.1696517622599632
+drug,unresolved,95,0.0013947169326662774
+cell_line,alias,10,0.08107419292045699
+cell_line,exact,95,0.7528762274010704
+cell_line,excluded_non_human,3,0.026290915877497698
+cell_line,unmatched,14,0.1397586638009749

@@ -1,0 +1,26 @@
+pair_name,cell_lines,mean_zip,sd_zip,share_synergistic
+vemurafenib + dactinomycin,60,22.73,14.74,0.85
+erlotinib + estramustine phosphate sodium,60,22.56,15.8,0.833
+mitotane + hydroxyurea,61,21.75,11.51,0.885
+tamoxifen + docetaxel,57,19.72,12.45,0.754
+vismodegib + mithramycin,60,19.3,11.16,0.783
+erlotinib + ixabepilone,57,19.0,12.37,0.789
+vismodegib + dactinomycin,60,18.71,11.02,0.883
+mk 1775 + y0217,40,17.95,9.81,0.8
+mithramycin + vemurafenib,50,17.14,9.11,0.72
+estramustine phosphate sodium + docetaxel,56,16.61,11.96,0.661
+cabazitaxel + tamoxifen,60,16.43,9.82,0.7
+tamoxifen + dactinomycin,54,16.17,9.45,0.741
+abiraterone + dactinomycin,59,15.58,11.52,0.559
+estramustine phosphate sodium + paclitaxel,58,15.24,8.22,0.707
+ridaforolimus + dactolisib,39,15.2,7.64,0.769
+y0217 + gemcitabine,39,15.03,12.45,0.615
+temozolomide + niraparib,39,14.71,9.83,0.641
+estramustine phosphate sodium + dactinomycin,56,14.63,8.86,0.714
+dactinomycin + idarubicin,56,14.14,8.42,0.696
+6 mercaptopurine + dasatinib,57,14.02,11.33,0.649
+pazopanib + dactinomycin,60,13.44,10.95,0.45
+cabazitaxel + retinoic acid,60,13.4,9.2,0.583
+tamoxifen + paclitaxel,55,13.25,8.34,0.6
+dactinomycin + fulvestrant,56,13.14,10.77,0.571
+mitotane + bleomycin,60,13.07,7.87,0.633

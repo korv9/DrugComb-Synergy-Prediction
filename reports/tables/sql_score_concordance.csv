@@ -1,0 +1,7 @@
+pair,pearson
+ZIP vs Bliss,0.921
+ZIP vs Loewe,0.249
+ZIP vs HSA,0.678
+Bliss vs Loewe,0.306
+Bliss vs HSA,0.792
+Loewe vs HSA,0.513
