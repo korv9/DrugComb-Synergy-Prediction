@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 
 import matplotlib
+import matplotlib.ticker
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
@@ -344,7 +345,7 @@ def fig_performance(paths: Paths, ceiling: float | None) -> None:
         tops = sub["pearson"] + sub["pearson_sd"].fillna(0)
         for xv, v, t in zip(xs, sub["pearson"], tops):
             if np.isfinite(v):
-                ax.text(xv, max(t, 0) + 0.015, f"{v:.2f}", ha="center", fontsize=7.5,
+                ax.text(xv, max(t, 0) + 0.015, f"{v:.2f}", ha="center", fontsize=7,
                         color=INK_2)
     if ceiling is not None:
         ax.axhline(ceiling, color=INK, lw=0.9, ls=(0, (4, 3)))
@@ -357,7 +358,7 @@ def fig_performance(paths: Paths, ceiling: float | None) -> None:
     ax.set_ylim(min(0, m["pearson"].min() - 0.05), 1.08)
     ax.set_yticks(np.arange(0, 1.01, 0.2))
     ax.grid(axis="x", visible=False)
-    ax.legend(loc="upper left", bbox_to_anchor=(0, -0.1), ncol=len(models))
+    ax.legend(loc="upper left", bbox_to_anchor=(0, -0.1), ncol=2)
     ax.set_title("Model performance by split strategy", pad=22)
     _subtitle(ax, "Cross-validated Pearson r by split strategy (mean ± sd over folds)")
     _save(fig, paths, "ml_01_performance_by_split")
@@ -452,6 +453,8 @@ def fig_overfitting(paths: Paths) -> None:
         a1.text(lc["n_train"].iloc[-1] * 1.12, lc[col].iloc[-1], f"{lc[col].iloc[-1]:.2f}",
                 va="center", fontsize=9)
     a1.set_xscale("log")
+    a1.set_xticks(lc["n_train"], [f"{v / 1e3:.0f}k" for v in lc["n_train"]])
+    a1.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     a1.set_xlabel("Training rows (log scale)")
     a1.set_ylabel("Pearson r")
     a1.set_ylim(0, 1)

@@ -26,54 +26,71 @@ All numbers and figures below come from running the pipeline
 
 ## Results at a glance
 
-*DrugCombDB `drugcombs_scored.csv` × DepMap 24Q4 Public, 3 folds per split
-strategy.*
+*DrugCombDB × DepMap 24Q4 Public, LightGBM, 3 folds per split strategy.*
 
 | | |
 |---|---|
-| Raw measurements → modelling rows | 498 865 → **387 846** (drug pair × cell line) |
-| Drug names → unique molecules | 5 347 → **4 188** (99.9 % of measurements have a structure) |
+| Raw measurements → modelling rows | 498 865 → **396 498** (drug pair × cell line × study) |
+| Drug names → unique molecules | 5 347 → **4 188** (99.9 % of measurements have a structure; 83 % have known protein targets) |
 | Cell lines matched to DepMap | 105 of 119 human lines (83 % of measurements); 3 malaria strains excluded |
+| Source studies | ALMANAC 224k · CLOUD 40k · ONEIL 23k · no dose-response data 110k |
 | Synergistic (ZIP > 10) / antagonistic (ZIP < −10) | 5.4 % / 9.5 % |
-| Pairs tested in only one cell line | 87 % |
-| Replicate agreement (a ceiling for any model) | Pearson r = **0.69** |
+| Replicate agreement within a study (a ceiling for any model) | Pearson r = **0.72** |
 
-| Split | Best model | Pearson r | R² | AUPRC (synergy; prevalence 0.054) |
-|---|---|---|---|---|
-| Random rows | LightGBM + screen history | **0.63** | 0.40 | 0.47 |
-| Unseen drug pair | LightGBM + screen history | **0.57** | 0.33 | 0.34 |
-| Unseen drug | LightGBM, chemistry + biology¹ | **0.44** | 0.19 | 0.23 |
-| Unseen cell line | Screen-history baseline² | **0.48** | 0.15 | 0.25 |
+**How well does it predict?** Best model per split strategy, compared with v2's
+first version (chemistry + biology + screen history):
 
-¹ Tied on r with the screen-history baseline (0.44), but much better calibrated
-(R² 0.19 against 0.05).
-² LightGBM with all features has a lower r (0.45) but the best R² (0.20).
+| Split | What it simulates | Before | **Now** | R² | Top-1 % hit rate |
+|---|---|---|---|---|---|
+| Random rows | Filling gaps in a screen | 0.63 | **0.66** | 0.44 | 75 % (18×) |
+| Unseen drug pair | Proposing new combinations of known drugs | 0.57 | **0.61** | 0.37 | 54 % (13×) |
+| Unseen drug | Adding a new compound | 0.40 | **0.54**¹ | 0.28 | 47 % (11×) |
+| Unseen cell line | Moving to a new tumour model | 0.45 | **0.57** | 0.31 | 71 % (22×) |
 
-What this shows:
+Pearson r, cross-validated. The hit rate is the share of truly synergistic
+combinations (ZIP > 10) among the all-features model's top 1 % within each
+screen; the share among random picks is 3–4 %.
+¹ Best without the screen-history features (see below).
 
-* **On random rows the model is close to the noise ceiling.** r = 0.63,
-  against 0.69 for two replicate measurements of the same experiment.
-* **Most of that performance is memory of the screen.** The in-fold means per
-  drug, cell line and pair (the "screen history") carry about 60 % of the
-  model's gain. A plain ridge on those means gets within 0.02 of LightGBM.
-* **Generalisation is the hard part.** Performance falls from 0.63 to 0.44
-  for a drug the model has never seen. There the history features stop
-  helping (0.41 with them, 0.44 without), and chemistry (descriptors,
-  fingerprints, similarity) is what carries the prediction.
-* **Cell-line biology adds little on top of the drug features.** RNA principal
-  components receive under 1 % of the gain. With only about 90 screened lines,
-  the model gets most of the cell effect from each line's in-fold mean ZIP.
-* **The choice of synergy model matters.** ZIP correlates with Bliss at 0.92
-  but only 0.25 with Loewe.
+**Is it overfitting?** It has high variance but is not harmfully overfit.
+Train r is 0.83 against 0.62 on unseen pairs. However, held-out performance
+still *rises* with more training data (0.55 → 0.62, figure below), and test
+error is flat from boosting round ≈ 240 to 800 (RMSE 7.39 → 7.42). A
+y-scramble run (same pipeline, shuffled labels) scores r = 0.002, so no label
+information leaks into the features.
+
+**What each data source adds (ablation):**
+
+* **Monotherapy response is the biggest single gain:** +0.03 to +0.12 r
+  depending on the split. It is the only feature group that describes how
+  *this* cell line responds to *this* drug.
+* **Screen history hurts on unseen drugs** (0.44 → 0.40). The in-fold means
+  fall back to a global prior for a drug that has never been screened, and
+  the model learns to trust them. Dropping them gives the best unseen-drug
+  model (0.54).
+* **Study as a feature adds nothing on top of history,** but it matters for
+  the data: the CLOUD screen (one cell line, KBM-7) has median ZIP −15.5
+  against −1.2 to +1.2 elsewhere, and it is where the model fails
+  (r ≈ 0.28, RMSE 18).
+* **Targets add mechanism, not accuracy.** The target embedding takes 12 % of
+  the gain, but the total barely moves once monotherapy is in. It mostly
+  re-encodes what the single-agent response already shows.
+* **Calibration** is good for random, unseen-pair and unseen-cell splits. For
+  unseen drugs the model is about 1 ZIP unit too optimistic in the middle of
+  the range.
+
+Caveat: monotherapy features come from the same screen as the combination.
+The results therefore assume single-agent responses are measured before the
+combination is predicted, which is the standard setting in combination
+screening (e.g. the AZ-DREAM challenge).
 
 | | |
 |---|---|
-| ![Performance by split](reports/figures/ml_01_performance_by_split.png) | ![Replicate agreement](reports/figures/an_02_replicate_agreement.png) |
+| ![Performance by split](reports/figures/ml_01_performance_by_split.png) | ![Ablation](reports/figures/ml_04_ablation.png) |
+| ![Overfitting check](reports/figures/ml_05_overfitting.png) | ![Enrichment](reports/figures/ml_06_enrichment.png) |
 | ![Cleaning funnel](reports/figures/de_01_data_funnel.png) | ![Entity resolution](reports/figures/de_02_entity_resolution.png) |
-| ![Synergy by lineage](reports/figures/an_04_synergy_by_lineage.png) | ![Top pairs](reports/figures/an_06_top_pairs.png) |
-| ![ZIP distribution](reports/figures/an_01_zip_distribution.png) | ![Cell-line landscape](reports/figures/an_07_cell_landscape.png) |
-
----
+| ![Synergy by study](reports/figures/an_08_synergy_by_study.png) | ![Replicate agreement](reports/figures/an_02_replicate_agreement.png) |
+| ![Synergy by lineage](reports/figures/an_04_synergy_by_lineage.png) | ![Calibration](reports/figures/ml_07_calibration.png) |
 
 ## Pipeline
 
@@ -188,6 +205,10 @@ DepMap expression space.
 | Chemistry: fingerprints | Morgan (r = 2) bits summed over the pair (0/1/2), rare bits filtered | no |
 | Chemistry: descriptors & similarity | Tanimoto similarity; sum and \|difference\| of 11 RDKit descriptors (MW, logP, TPSA, QED, …) | no |
 | Biology | 32 RNA principal components (PCA fitted on *all* DepMap models), lineage | no |
+| Context | Source study (ALMANAC, ONEIL, CLOUD, unknown) | no |
+| Monotherapy | Each drug's single-agent % inhibition in the block (mean, max; min/max over the pair) plus Bliss- and HSA-expected combined effect | no |
+| Targets in the cell line | Mean expression z-score, strongest CRISPR dependency and damaging mutation of each drug's top-10 STITCH targets | no |
+| Mechanism | 16-dim SVD embedding of the drug × target matrix (sum, \|difference\|, cosine), number of targets | no |
 | Screen history | Smoothed mean ZIP per drug, cell, pair and drug×cell, plus log counts | **yes – in-fold only** |
 
 Screen-history features are recomputed inside every training fold. For the
@@ -204,9 +225,15 @@ Tests check that changing the test labels cannot change the test features.
 | Unseen cell line | Moving to a new tumour model |
 
 Models: global mean, a screen-history baseline (ridge on the in-fold means),
-LightGBM on chemistry + biology only, and LightGBM with everything. Metrics:
-Pearson and Spearman r, RMSE, R², and AUPRC for "synergistic" (ZIP > 10)
-together with its prevalence.
+and LightGBM on a cumulative ladder of feature groups (chemistry + biology →
++ history → + study → + monotherapy → + targets), plus "everything except
+history". The ladder is configured in `model.feature_sets`. Metrics: Pearson
+and Spearman r, RMSE, R², and AUPRC for "synergistic" (ZIP > 10) together
+with its prevalence.
+
+`python -m drugsyn diagnose` adds learning curves, a y-scramble leakage check,
+calibration by decile, performance per study, and enrichment of true hits
+among the top-ranked predictions.
 
 ## What changed since v1
 
@@ -227,7 +254,7 @@ several problems that make that number optimistic:
 6. The step that built the final modelling table was missing from the repo, so
    the results could not be reproduced.
 
-v2 fixes each of these. On the same kind of random split, v2 reaches R² 0.40,
+v2 fixes each of these. On the same kind of random split, v2 reaches R² 0.44,
 not 0.52. More importantly, it measures how well the model generalises to
 unseen pairs, drugs and cell lines, which v1 could not do.
 

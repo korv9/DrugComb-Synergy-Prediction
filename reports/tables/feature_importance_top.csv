@@ -1,201 +1,601 @@
 scheme,model,feature,family,gain
-cold_cell,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.27832852220296495
-random,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.25853878871157027
-cold_pair,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.25807203167563414
-cold_drug,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.24131223059878057
-random,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.1498234729420357
-cold_pair,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.14683974003918712
-cold_cell,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.14421494912452262
-cold_drug,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.14298855321667625
-cold_cell,lgbm_chem_bio,lineage,Biology: tissue lineage,0.10752391789022274
-cold_drug,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.09565418759700034
-cold_pair,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.09310516705349077
-random,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.09181581443215554
-random,lgbm_chem_bio,lineage,Biology: tissue lineage,0.09178165059557834
-cold_pair,lgbm_chem_bio,lineage,Biology: tissue lineage,0.09163967678194125
-cold_drug,lgbm_chem_bio,lineage,Biology: tissue lineage,0.08205356639838009
-cold_cell,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.08045592003435653
-cold_drug,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.04094122210204686
-random,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.037452631399353356
-cold_pair,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.03640685615196947
-cold_cell,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.03507990248193956
-cold_drug,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.03491221620187215
-cold_pair,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.03271088387727486
-cold_cell,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.031782888684735194
-random,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.030471244747694318
-cold_pair,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.02937831934800073
-random,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.02751422913281319
-cold_cell,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.025970791585777694
-cold_drug,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.023347563704019487
-cold_pair,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.022783679095526393
-random,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.022327497762166318
-cold_drug,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.022126192807223277
-cold_cell,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.02175253020025292
-cold_cell,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.021328694795814267
-cold_drug,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.021127179604671493
-random,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.02095529021239131
-cold_pair,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.02060775602760249
-random,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.020119630819223824
-cold_pair,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.02010640310811823
-cold_drug,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.019839445852094708
-cold_drug,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.019582726509108885
-random,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.019431300380705483
-random,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.01930906338464611
-cold_cell,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.019127572145571366
-cold_pair,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.01908365970902687
-random,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.019041515209503715
-cold_cell,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.01887969157149237
-cold_pair,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.018878347046453265
-cold_drug,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.018726047222183923
-cold_pair,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.018669582923584078
-cold_drug,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.01826452539925871
-cold_drug,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.01786276081619422
-cold_cell,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.017689082889654432
-cold_cell,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.017296040002662286
-random,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.01694371461784157
-cold_drug,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.016449667545156473
-cold_pair,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.016369818669927726
-cold_cell,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.01627835478823456
-cold_cell,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.016226093194894962
-cold_drug,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.015964172672544043
-cold_pair,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.015898111592253576
-random,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.015702832986984164
-cold_cell,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.015606931786887115
-cold_pair,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.015553682162375375
-cold_drug,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.015545296385544187
-cold_drug,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.015232211113696244
-random,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.015091811882468697
-random,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.014947802646087376
-cold_drug,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.014613851992793215
-cold_drug,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.014523512849524129
-cold_cell,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.01425020914380188
-cold_pair,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.014229095054088467
-cold_drug,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.014177223034201812
-cold_cell,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.014016065514613525
-cold_cell,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.013704680031598636
-random,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.013687712966559315
-cold_drug,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.013682423964291637
-cold_drug,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.01344226294835049
-cold_cell,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.013420644618877686
-cold_pair,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.01339555235654836
-random,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.013357642881481965
-cold_drug,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.01331790088862213
-cold_pair,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.013287076328157807
-cold_cell,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.013257333190547824
-cold_pair,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.013111178410313187
-cold_pair,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.013014598231995632
-cold_drug,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.012989237565316758
-cold_pair,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.012947745803781377
-cold_pair,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012907628351386272
-random,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.012888950751093533
-cold_drug,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.012738331174929944
-random,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.01271275174959422
-cold_drug,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.012672575140696023
-cold_drug,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.012619542866927477
-cold_pair,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.012613027540608788
-random,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.012572660407594749
-cold_drug,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.012523392303787064
-cold_pair,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.012511415773488646
-cold_pair,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.012497059464772685
-cold_drug,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012454248166639854
-random,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.012449987620319949
-random,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012442995998544664
-cold_pair,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.01242446888092187
-random,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.012410725124623948
-cold_pair,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.012381520694226676
-random,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.0123570004980263
-cold_cell,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.012355071016349957
-cold_cell,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.01228056236852904
-random,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.012277031056854829
-cold_cell,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012229363662172298
-cold_pair,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.01222191208302205
-random,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.01218286848004413
-cold_drug,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.012181357208536005
-cold_pair,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012162204951798247
-cold_cell,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012144048460874551
-cold_drug,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.01213778891116369
-cold_cell,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.012120800674325555
-random,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.012071262021009334
-cold_cell,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.012054395411345327
-cold_pair,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.011978144471175131
-cold_cell,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.011929615314782788
-random,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.011924447743103804
-cold_pair,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.011922289069089993
-cold_pair,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.011909671721388815
-cold_pair,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.011901390510824646
-cold_drug,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.011879973711785688
-random,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.011871411228131923
-random,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.011861892750776511
-cold_cell,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.011848729694430874
-random,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.01171127084569251
-random,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.011706647413080848
-cold_cell,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.011689703829829602
-cold_cell,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.011653845039035512
-random,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.0116508430698879
-cold_cell,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.011558803276077131
-cold_drug,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.01147011761259753
-cold_drug,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.011338450051261264
-cold_pair,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.01115031101559876
-cold_cell,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.011079960545967672
-cold_cell,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.010874256612462663
-cold_drug,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.0108575093360421
-cold_cell,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.010616065797220972
-cold_cell,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.010611568346564215
-random,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.0105257986004628
-cold_drug,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.010513386734056223
-cold_cell,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.010479188448110598
-random,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010454722097649902
-random,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.010335878118179454
-cold_pair,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010204992954078528
-cold_cell,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.010057697254592693
-cold_cell,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010057053857451217
-cold_drug,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.010018466187521733
-cold_pair,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.009814539267332808
-cold_pair,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.009515166972077747
-random,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.009395184589355397
-cold_pair,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.009386036409157847
-random,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.009314594351450517
-cold_drug,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.009264987177976419
-cold_drug,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.009161120672578273
-cold_pair,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.009146347603253223
-cold_cell,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.008865985080406024
-random,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.00865165952445744
-cold_pair,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.008405754855302141
-cold_drug,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.007903153471543023
-cold_drug,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007846601754248147
-cold_drug,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.0077473994600006256
-cold_cell,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.007698590031058876
-cold_pair,lgbm_chem_bio,fps_323,Chemistry: fingerprint bits,0.007581876424920732
-random,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.007521971780016244
-cold_drug,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.0075061196880067725
-cold_cell,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.007439923261682343
-cold_pair,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.007380988116383856
-random,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.007346317023352217
-cold_pair,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.007298343745942855
-cold_pair,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.007255807186034344
-cold_pair,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007161956441223691
-random,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.00708626438062624
-cold_cell,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007075059762347079
-cold_drug,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.007063419275323159
-cold_drug,lgbm_chem_bio,rna_pc12,Biology: RNA expression PCs,0.007042968058053764
-cold_cell,lgbm_chem_bio,fps_99,Chemistry: fingerprint bits,0.006967469426540122
-random,lgbm_chem_bio,fps_136,Chemistry: fingerprint bits,0.006954004148810097
-cold_pair,lgbm_chem_bio,fps_136,Chemistry: fingerprint bits,0.006789468489875126
-random,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.006750718281617957
-cold_cell,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.006729556580051113
-cold_cell,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.006610394372528957
-random,lgbm_chem_bio,rna_pc12,Biology: RNA expression PCs,0.006600819351431246
-cold_drug,lgbm_chem_bio,fps_457,Chemistry: fingerprint bits,0.006591499224016177
-cold_drug,lgbm_full,n_cell_log,Screen history: in-fold counts,0.00638696064163823
-cold_cell,lgbm_chem_bio,fps_323,Chemistry: fingerprint bits,0.00620777031190678
-cold_drug,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.005673716182016817
-cold_pair,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.005415502710281096
-random,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.005259224608089715
-cold_drug,lgbm_full,chem_rot_bonds_absdiff,Chemistry: descriptors & similarity,0.005235422142365818
-random,lgbm_full,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.005019145268144926
-cold_pair,lgbm_full,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.0050118670499451476
-cold_cell,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.005009209905637209
-cold_pair,lgbm_full,n_cell_log,Screen history: in-fold counts,0.004884596125989201
-random,lgbm_full,n_cell_log,Screen history: in-fold counts,0.004879771914757215
-cold_cell,lgbm_full,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.004688880294261215
-cold_cell,lgbm_full,chem_rot_bonds_absdiff,Chemistry: descriptors & similarity,0.004660479041813199
+cold_cell,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.2766931019497447
+cold_cell,lgbm_study,te_drugcell_max,Screen history: in-fold mean ZIP,0.2759144485463216
+cold_pair,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.260315848108209
+random,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.25646584420596025
+cold_pair,lgbm_study,te_drugcell_max,Screen history: in-fold mean ZIP,0.24649032746035662
+cold_drug,lgbm_full,te_drugcell_max,Screen history: in-fold mean ZIP,0.24319754332239385
+random,lgbm_study,te_drugcell_max,Screen history: in-fold mean ZIP,0.24259320448123836
+cold_drug,lgbm_study,te_drugcell_max,Screen history: in-fold mean ZIP,0.23224202553914294
+cold_cell,lgbm_all,te_drugcell_max,Screen history: in-fold mean ZIP,0.1929595252563813
+cold_pair,lgbm_all,te_drugcell_max,Screen history: in-fold mean ZIP,0.1701200959665992
+cold_cell,lgbm_mono,te_drugcell_max,Screen history: in-fold mean ZIP,0.16962240506310797
+random,lgbm_all,te_drugcell_max,Screen history: in-fold mean ZIP,0.16442814717933127
+cold_pair,lgbm_mono,te_drugcell_max,Screen history: in-fold mean ZIP,0.16285162787124938
+random,lgbm_mono,te_drugcell_max,Screen history: in-fold mean ZIP,0.16039343988135515
+cold_drug,lgbm_all,te_drugcell_max,Screen history: in-fold mean ZIP,0.1591377473259159
+cold_drug,lgbm_mono,te_drugcell_max,Screen history: in-fold mean ZIP,0.14981348802857505
+cold_pair,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.1479937511328645
+random,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.14769771264521345
+cold_cell,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.14585627590042188
+cold_drug,lgbm_full,te_drugcell_min,Screen history: in-fold mean ZIP,0.14277124992079282
+cold_cell,lgbm_mono,te_drugcell_min,Screen history: in-fold mean ZIP,0.13484336562343244
+random,lgbm_mono,te_drugcell_min,Screen history: in-fold mean ZIP,0.13156421126074647
+cold_pair,lgbm_study,te_drugcell_min,Screen history: in-fold mean ZIP,0.13064067298004614
+cold_pair,lgbm_mono,te_drugcell_min,Screen history: in-fold mean ZIP,0.1305920398686792
+random,lgbm_study,te_drugcell_min,Screen history: in-fold mean ZIP,0.1302587408043995
+cold_cell,lgbm_all_no_history,study,Context: source study,0.12829747439218028
+cold_drug,lgbm_mono,te_drugcell_min,Screen history: in-fold mean ZIP,0.12711654399983893
+cold_drug,lgbm_study,te_drugcell_min,Screen history: in-fold mean ZIP,0.1232121465285015
+random,lgbm_all_no_history,study,Context: source study,0.11819671563501828
+cold_pair,lgbm_all_no_history,study,Context: source study,0.11813527128339014
+cold_cell,lgbm_study,te_drugcell_min,Screen history: in-fold mean ZIP,0.11377846930897138
+cold_drug,lgbm_all_no_history,study,Context: source study,0.10929674634609689
+cold_cell,lgbm_chem_bio,lineage,Biology: tissue lineage,0.10751319561568656
+cold_drug,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.0959026314580252
+cold_drug,lgbm_study,te_pair,Screen history: in-fold mean ZIP,0.09457978929536437
+cold_pair,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.09406184503803537
+random,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.09364727258788264
+cold_pair,lgbm_study,te_pair,Screen history: in-fold mean ZIP,0.09252290882531806
+random,lgbm_chem_bio,lineage,Biology: tissue lineage,0.0922226610533622
+cold_pair,lgbm_chem_bio,lineage,Biology: tissue lineage,0.09165004248146374
+random,lgbm_study,te_pair,Screen history: in-fold mean ZIP,0.09043289875888143
+cold_drug,lgbm_mono,te_pair,Screen history: in-fold mean ZIP,0.08861750358683747
+cold_drug,lgbm_all,te_pair,Screen history: in-fold mean ZIP,0.08859353193848472
+cold_pair,lgbm_all,te_pair,Screen history: in-fold mean ZIP,0.08765730571829207
+random,lgbm_all,te_pair,Screen history: in-fold mean ZIP,0.08646559540961403
+random,lgbm_all,te_cell,Screen history: in-fold mean ZIP,0.08620962377023267
+cold_pair,lgbm_mono,te_pair,Screen history: in-fold mean ZIP,0.08593614284201191
+random,lgbm_mono,te_pair,Screen history: in-fold mean ZIP,0.08532563773638058
+random,lgbm_all,te_drugcell_min,Screen history: in-fold mean ZIP,0.08404645243139476
+cold_drug,lgbm_all,te_drugcell_min,Screen history: in-fold mean ZIP,0.08246151155189801
+cold_drug,lgbm_chem_bio,lineage,Biology: tissue lineage,0.08243875076639302
+cold_pair,lgbm_all,te_drugcell_min,Screen history: in-fold mean ZIP,0.08210918680883612
+cold_cell,lgbm_full,te_pair,Screen history: in-fold mean ZIP,0.08095841645425976
+cold_cell,lgbm_study,te_pair,Screen history: in-fold mean ZIP,0.07940371032179168
+cold_cell,lgbm_mono,te_pair,Screen history: in-fold mean ZIP,0.07514161514917558
+random,lgbm_all_no_history,mono_inh_mean_min,Monotherapy response,0.07512786526085387
+cold_cell,lgbm_all,te_pair,Screen history: in-fold mean ZIP,0.07489449870128019
+cold_pair,lgbm_study,te_cell,Screen history: in-fold mean ZIP,0.07368097953100052
+cold_pair,lgbm_all_no_history,mono_inh_mean_min,Monotherapy response,0.07332595355004802
+cold_drug,lgbm_all_no_history,mono_inh_mean_min,Monotherapy response,0.0731855818458524
+cold_pair,lgbm_all,te_cell,Screen history: in-fold mean ZIP,0.07116426466145702
+cold_drug,lgbm_all,te_cell,Screen history: in-fold mean ZIP,0.07114702239315547
+cold_cell,lgbm_all_no_history,mono_inh_mean_min,Monotherapy response,0.07087354382245174
+cold_cell,lgbm_all,te_cell,Screen history: in-fold mean ZIP,0.06775927131655153
+cold_drug,lgbm_study,te_cell,Screen history: in-fold mean ZIP,0.06747224057496061
+cold_cell,lgbm_all,te_drugcell_min,Screen history: in-fold mean ZIP,0.06744917332839294
+cold_cell,lgbm_study,te_cell,Screen history: in-fold mean ZIP,0.0662689884772148
+random,lgbm_study,te_cell,Screen history: in-fold mean ZIP,0.06433086533640671
+cold_cell,lgbm_all_no_history,mono_inh_max_min,Monotherapy response,0.061180668010408924
+random,lgbm_all_no_history,mono_inh_max_min,Monotherapy response,0.05913872697665403
+cold_pair,lgbm_all_no_history,mono_inh_max_min,Monotherapy response,0.05885848448876574
+cold_cell,lgbm_mono,n_drugcell_min_log,Screen history: in-fold counts,0.057329268941633794
+cold_drug,lgbm_all_no_history,mono_inh_max_min,Monotherapy response,0.05631350835740246
+cold_drug,lgbm_mono,n_drugcell_min_log,Screen history: in-fold counts,0.05510639815092578
+cold_cell,lgbm_all,n_drugcell_min_log,Screen history: in-fold counts,0.054962102783860566
+cold_pair,lgbm_mono,n_drugcell_min_log,Screen history: in-fold counts,0.05193233843373673
+random,lgbm_mono,n_drugcell_min_log,Screen history: in-fold counts,0.04522705163778881
+random,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.04445641549872551
+cold_pair,lgbm_all,n_drugcell_min_log,Screen history: in-fold counts,0.04232785304945244
+cold_drug,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.04102873338830815
+random,lgbm_mono,te_drug_min,Screen history: in-fold mean ZIP,0.04057590770309598
+cold_drug,lgbm_all,n_drugcell_min_log,Screen history: in-fold counts,0.039778229518434675
+cold_cell,lgbm_mono,te_drug_min,Screen history: in-fold mean ZIP,0.03944198027587059
+cold_pair,lgbm_all_no_history,mono_inh_mean_max,Monotherapy response,0.03941737142105281
+cold_pair,lgbm_mono,te_drug_min,Screen history: in-fold mean ZIP,0.0391654045154885
+cold_pair,lgbm_all_no_history,lineage,Biology: tissue lineage,0.03825786648600796
+random,lgbm_all_no_history,mono_inh_mean_max,Monotherapy response,0.03825031782915946
+cold_drug,lgbm_all_no_history,mono_inh_mean_max,Monotherapy response,0.03808857143308064
+random,lgbm_all_no_history,lineage,Biology: tissue lineage,0.03797767593322829
+cold_drug,lgbm_mono,te_drug_min,Screen history: in-fold mean ZIP,0.03763659368186392
+cold_cell,lgbm_all_no_history,mono_headroom,Monotherapy response,0.03717507843739379
+cold_cell,lgbm_all_no_history,mono_inh_mean_max,Monotherapy response,0.03700195374515683
+cold_drug,lgbm_all_no_history,lineage,Biology: tissue lineage,0.03698372343292097
+cold_cell,lgbm_all_no_history,lineage,Biology: tissue lineage,0.03666851470325009
+cold_drug,lgbm_all_no_history,mono_headroom,Monotherapy response,0.036604545497218643
+random,lgbm_all,mono_inh_mean_min,Monotherapy response,0.0360211191269881
+cold_pair,lgbm_all,mono_inh_mean_min,Monotherapy response,0.035575109025751776
+cold_pair,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.03546919217158781
+cold_drug,lgbm_all,mono_inh_mean_min,Monotherapy response,0.03544841160978011
+random,lgbm_all_no_history,mono_headroom,Monotherapy response,0.034686245376839564
+cold_pair,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.034210310859819786
+random,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.03376631774488034
+cold_cell,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.03333833688690621
+cold_drug,lgbm_mono,mono_inh_mean_min,Monotherapy response,0.0333076745028665
+cold_cell,lgbm_full,te_drug_max,Screen history: in-fold mean ZIP,0.03302720056020423
+cold_pair,lgbm_mono,mono_inh_mean_min,Monotherapy response,0.03286532126972141
+random,lgbm_mono,mono_inh_mean_min,Monotherapy response,0.032848590982380084
+cold_cell,lgbm_all,mono_inh_mean_min,Monotherapy response,0.03281067121233459
+cold_drug,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.032538412757250945
+cold_cell,lgbm_all_no_history,mono_bliss_expected,Monotherapy response,0.031896678449933394
+cold_pair,lgbm_mono,te_drug_max,Screen history: in-fold mean ZIP,0.03171763489930902
+cold_pair,lgbm_all_no_history,mono_inh_max_max,Monotherapy response,0.03151240343635405
+cold_pair,lgbm_all_no_history,mono_bliss_expected,Monotherapy response,0.03142490517895157
+cold_cell,lgbm_all_no_history,mono_inh_max_max,Monotherapy response,0.031144263016099735
+cold_drug,lgbm_study,te_drug_max,Screen history: in-fold mean ZIP,0.031115309876142805
+random,lgbm_all_no_history,mono_inh_max_max,Monotherapy response,0.03108646581106658
+cold_drug,lgbm_mono,te_drug_max,Screen history: in-fold mean ZIP,0.03098755066166922
+cold_cell,lgbm_mono,mono_inh_mean_min,Monotherapy response,0.030515370948952097
+cold_pair,lgbm_all_no_history,mono_headroom,Monotherapy response,0.030351761717570452
+cold_pair,lgbm_study,te_drug_max,Screen history: in-fold mean ZIP,0.02909743248788428
+random,lgbm_mono,te_drug_max,Screen history: in-fold mean ZIP,0.028878724477994902
+cold_drug,lgbm_mono,mono_inh_mean_max,Monotherapy response,0.02871822621450733
+random,lgbm_study,te_drug_max,Screen history: in-fold mean ZIP,0.028690858036836575
+random,lgbm_all,n_cell_log,Screen history: in-fold counts,0.028617977214375607
+cold_drug,lgbm_all_no_history,mono_bliss_expected,Monotherapy response,0.028561467712186095
+cold_cell,lgbm_mono,te_drug_max,Screen history: in-fold mean ZIP,0.02852959810348886
+cold_drug,lgbm_all_no_history,mono_inh_max_max,Monotherapy response,0.028445238190405706
+random,lgbm_mono,mono_inh_mean_max,Monotherapy response,0.02832099812403573
+random,lgbm_study,n_cell_log,Screen history: in-fold counts,0.028145936982274702
+cold_pair,lgbm_mono,mono_inh_mean_max,Monotherapy response,0.028074576615916336
+cold_cell,lgbm_study,te_drug_max,Screen history: in-fold mean ZIP,0.027587714916837407
+random,lgbm_all_no_history,mono_bliss_expected,Monotherapy response,0.02755427820075573
+cold_cell,lgbm_full,te_cell,Screen history: in-fold mean ZIP,0.02704449829801012
+cold_cell,lgbm_mono,mono_inh_mean_max,Monotherapy response,0.026781506492951843
+random,lgbm_all,n_drugcell_min_log,Screen history: in-fold counts,0.026167659596952497
+cold_pair,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.025395162202232268
+cold_drug,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.024227951956187776
+cold_pair,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.02338883066869919
+cold_drug,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.023363908237993797
+cold_cell,lgbm_all_no_history,mono_hsa_expected,Monotherapy response,0.023142121456190008
+cold_cell,lgbm_study,n_drugcell_min_log,Screen history: in-fold counts,0.022881974159901966
+cold_pair,lgbm_all,n_cell_log,Screen history: in-fold counts,0.02286509151245998
+random,lgbm_all_no_history,mono_hsa_expected,Monotherapy response,0.02275045258081529
+cold_drug,lgbm_all_no_history,mono_hsa_expected,Monotherapy response,0.022550461879280375
+random,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.022381662585005634
+cold_drug,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.022313911874577264
+random,lgbm_study,te_drug_min,Screen history: in-fold mean ZIP,0.02185844295497406
+cold_pair,lgbm_all_no_history,mono_hsa_expected,Monotherapy response,0.021796542152555543
+cold_cell,lgbm_chem_bio,chem_logp_sum,Chemistry: descriptors & similarity,0.02174757467735901
+cold_pair,lgbm_mono,mono_bliss_expected,Monotherapy response,0.02174182607812286
+cold_cell,lgbm_study,te_drug_min,Screen history: in-fold mean ZIP,0.021720858568812045
+cold_drug,lgbm_study,te_drug_min,Screen history: in-fold mean ZIP,0.021669396402265288
+cold_drug,lgbm_mono,mono_bliss_expected,Monotherapy response,0.021663660088057313
+random,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.02162927519413264
+cold_pair,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.02118772044383836
+cold_cell,lgbm_full,te_drug_min,Screen history: in-fold mean ZIP,0.021139111082196876
+random,lgbm_all,mono_inh_max_max,Monotherapy response,0.021117910905892035
+cold_pair,lgbm_all,mono_inh_mean_max,Monotherapy response,0.021109955746619034
+cold_pair,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.021020327019267575
+random,lgbm_all,mono_inh_mean_max,Monotherapy response,0.02101206446503766
+cold_cell,lgbm_mono,mono_bliss_expected,Monotherapy response,0.02097495064498998
+cold_pair,lgbm_study,te_drug_min,Screen history: in-fold mean ZIP,0.020895325707301335
+cold_drug,lgbm_all,mono_inh_max_max,Monotherapy response,0.020860372709357877
+cold_drug,lgbm_study,n_drugcell_min_log,Screen history: in-fold counts,0.02075094228506236
+cold_drug,lgbm_all,mono_inh_mean_max,Monotherapy response,0.020698841921623707
+cold_cell,lgbm_all,mono_bliss_expected,Monotherapy response,0.02065369909801709
+random,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.020625987169252794
+random,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.020590370660799398
+cold_drug,lgbm_mono,te_cell,Screen history: in-fold mean ZIP,0.020474617504364363
+cold_drug,lgbm_all,n_cell_log,Screen history: in-fold counts,0.02042360664795952
+cold_cell,lgbm_all,n_cell_log,Screen history: in-fold counts,0.020421521224620594
+cold_pair,lgbm_all,mono_bliss_expected,Monotherapy response,0.020167052740410633
+random,lgbm_full,n_drugcell_min_log,Screen history: in-fold counts,0.020157908871332997
+cold_cell,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.020139657015455
+random,lgbm_mono,mono_inh_max_max,Monotherapy response,0.020113987566176376
+cold_pair,lgbm_mono,mono_inh_max_max,Monotherapy response,0.020090214213418552
+cold_pair,lgbm_all,mono_inh_max_max,Monotherapy response,0.020089073933473787
+cold_drug,lgbm_mono,mono_inh_max_max,Monotherapy response,0.02008164460622001
+cold_cell,lgbm_mono,mono_headroom,Monotherapy response,0.019874735209906933
+cold_cell,lgbm_mono,mono_inh_max_max,Monotherapy response,0.019814993206690713
+cold_cell,lgbm_all,mono_inh_mean_max,Monotherapy response,0.019788630679350456
+random,lgbm_mono,n_cell_log,Screen history: in-fold counts,0.01978448354007824
+random,lgbm_mono,mono_bliss_expected,Monotherapy response,0.01977103472626773
+cold_drug,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.019712221449407732
+cold_drug,lgbm_all,mono_bliss_expected,Monotherapy response,0.01957555974281173
+cold_drug,lgbm_all_no_history,chem_logp_sum,Chemistry: descriptors & similarity,0.019445955731080652
+random,lgbm_mono,mono_headroom,Monotherapy response,0.019404294767824837
+cold_pair,lgbm_study,n_drugcell_min_log,Screen history: in-fold counts,0.01936517787664213
+cold_cell,lgbm_all,mono_inh_max_max,Monotherapy response,0.019183792964425003
+random,lgbm_all,mono_bliss_expected,Monotherapy response,0.01916868591729329
+cold_pair,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.01913815683538672
+cold_drug,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.019112930296787112
+random,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.019090686769916747
+cold_pair,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.018929837776731448
+cold_cell,lgbm_all,mono_headroom,Monotherapy response,0.018799229325080925
+random,lgbm_mono,te_cell,Screen history: in-fold mean ZIP,0.018716629756277182
+cold_drug,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.01851521536212478
+cold_drug,lgbm_chem_bio,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.018221197444340843
+cold_drug,lgbm_all,te_drug_min,Screen history: in-fold mean ZIP,0.01820982135064764
+cold_pair,lgbm_all,mono_headroom,Monotherapy response,0.018197732546315983
+cold_pair,lgbm_mono,te_cell,Screen history: in-fold mean ZIP,0.01816472655485805
+cold_cell,lgbm_chem_bio,chem_qed_sum,Chemistry: descriptors & similarity,0.018157692166789374
+cold_drug,lgbm_mono,mono_inh_max_min,Monotherapy response,0.018131766091419504
+cold_pair,lgbm_all,te_drug_min,Screen history: in-fold mean ZIP,0.018094602986083164
+random,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.018006277147160035
+cold_pair,lgbm_mono,mono_inh_max_min,Monotherapy response,0.017976601678296632
+cold_cell,lgbm_chem_bio,chem_aromatic_rings_sum,Chemistry: descriptors & similarity,0.01796793796262519
+random,lgbm_all,te_drug_min,Screen history: in-fold mean ZIP,0.01787892374102315
+random,lgbm_mono,mono_inh_max_min,Monotherapy response,0.017861863526458868
+cold_pair,lgbm_all_no_history,chem_logp_sum,Chemistry: descriptors & similarity,0.01785205286671004
+random,lgbm_all_no_history,chem_logp_sum,Chemistry: descriptors & similarity,0.017790723376174922
+cold_pair,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.017782549122500064
+random,lgbm_all,mono_headroom,Monotherapy response,0.01775902319819284
+cold_cell,lgbm_chem_bio,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.017639270757679546
+cold_drug,lgbm_all,mono_headroom,Monotherapy response,0.017475535018661628
+cold_cell,lgbm_mono,te_cell,Screen history: in-fold mean ZIP,0.017422450875675566
+cold_cell,lgbm_mono,mono_inh_max_min,Monotherapy response,0.01736868946961831
+cold_drug,lgbm_all,te_drug_max,Screen history: in-fold mean ZIP,0.017309389541552245
+cold_drug,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.017190987668220428
+cold_pair,lgbm_mono,mono_headroom,Monotherapy response,0.01708967832123944
+cold_pair,lgbm_all,te_drug_max,Screen history: in-fold mean ZIP,0.01678984670588235
+cold_cell,lgbm_all_no_history,chem_logp_sum,Chemistry: descriptors & similarity,0.01670734316683713
+cold_cell,lgbm_all,te_drug_min,Screen history: in-fold mean ZIP,0.016690681372516464
+cold_drug,lgbm_mono,mono_headroom,Monotherapy response,0.016480683246799296
+cold_pair,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.016434873435599833
+random,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.016252872628449874
+cold_drug,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.016239957030167604
+cold_pair,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.016100080582922574
+cold_cell,lgbm_chem_bio,chem_tpsa_sum,Chemistry: descriptors & similarity,0.015953125413041714
+cold_drug,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.01573554737091094
+cold_pair,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.015368312236985296
+cold_pair,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.015343399381889023
+random,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.015318969985830525
+cold_cell,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.01525170858716624
+cold_cell,lgbm_chem_bio,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.015243459763265943
+cold_drug,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.015227568548699244
+random,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.015205011085827468
+cold_cell,lgbm_all,te_drug_max,Screen history: in-fold mean ZIP,0.015111314571902597
+cold_drug,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.015073297331025139
+random,lgbm_chem_bio,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.015003434352703621
+random,lgbm_all,te_drug_max,Screen history: in-fold mean ZIP,0.01494582409130929
+cold_cell,lgbm_study,n_cell_log,Screen history: in-fold counts,0.01487599849873688
+random,lgbm_study,n_drugcell_min_log,Screen history: in-fold counts,0.01481394857079951
+cold_cell,lgbm_chem_bio,chem_rings_sum,Chemistry: descriptors & similarity,0.014648825644908275
+cold_drug,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.014308625825669004
+cold_drug,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.014252735644721555
+random,lgbm_all_no_history,tgt_mut_max,Targets in the cell line,0.014216730086612216
+cold_pair,lgbm_all_no_history,tgt_mut_max,Targets in the cell line,0.014030931339953362
+cold_pair,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.013934379137170874
+cold_cell,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.013800415492869282
+cold_drug,lgbm_study,chem_tanimoto,Chemistry: descriptors & similarity,0.013720940029135825
+cold_cell,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.013713564649122328
+cold_pair,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.013548620456459631
+random,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.013495324641615252
+cold_cell,lgbm_all_no_history,tgt_mut_max,Targets in the cell line,0.013490011878894691
+cold_pair,lgbm_all,mono_inh_max_min,Monotherapy response,0.01343770391295914
+cold_drug,lgbm_study,chem_logp_sum,Chemistry: descriptors & similarity,0.013360580694341524
+cold_cell,lgbm_all,mono_inh_max_min,Monotherapy response,0.013325800537260651
+cold_pair,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.013314540581347753
+random,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.013308653652262076
+random,lgbm_all,mono_inh_max_min,Monotherapy response,0.013290552803523432
+cold_drug,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.013280794220944468
+cold_drug,lgbm_study,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.013222049708580855
+random,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.013219402090481754
+cold_drug,lgbm_all,mono_inh_max_min,Monotherapy response,0.01321051180536125
+cold_drug,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.01317901575747705
+cold_cell,lgbm_study,chem_tanimoto,Chemistry: descriptors & similarity,0.013167635858352691
+cold_drug,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.0131579611833823
+cold_cell,lgbm_chem_bio,chem_logp_absdiff,Chemistry: descriptors & similarity,0.013107224446604726
+random,lgbm_study,chem_logp_sum,Chemistry: descriptors & similarity,0.013050244924711385
+cold_cell,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.013041247911573073
+cold_drug,lgbm_study,chem_qed_absdiff,Chemistry: descriptors & similarity,0.013010626345195125
+cold_drug,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.012990276348685693
+cold_pair,lgbm_chem_bio,chem_qed_absdiff,Chemistry: descriptors & similarity,0.012978526820372418
+cold_pair,lgbm_chem_bio,chem_tanimoto,Chemistry: descriptors & similarity,0.012969076096612396
+cold_drug,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012926348166541984
+cold_cell,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012915498258391757
+cold_drug,lgbm_study,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012890035458981567
+cold_drug,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.012887959415475853
+cold_pair,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.012863311546450472
+cold_pair,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.01285202968756201
+cold_pair,lgbm_study,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.012837401205411584
+cold_pair,lgbm_mono,n_drugcell_max_log,Screen history: in-fold counts,0.012792586576638641
+random,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.012774576338750272
+cold_drug,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.012739455382109521
+cold_drug,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.012733464069014336
+cold_cell,lgbm_study,chem_logp_sum,Chemistry: descriptors & similarity,0.012638413522052729
+cold_drug,lgbm_study,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.012630289440265882
+cold_drug,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.012602144480632793
+random,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012561293720388464
+cold_pair,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.012550613983003991
+random,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.012520530774948831
+random,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.01250318995985942
+cold_pair,lgbm_study,chem_logp_sum,Chemistry: descriptors & similarity,0.012484187030210007
+cold_cell,lgbm_study,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.012463601064922942
+cold_drug,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.012458560360246356
+random,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.012416493742976703
+random,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.012413043599248384
+cold_pair,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.012411816126974581
+cold_pair,lgbm_chem_bio,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.0124055176054671
+cold_drug,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.0123683714097139
+random,lgbm_study,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.012346274243274327
+cold_cell,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.012338580796054077
+cold_pair,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.012302206002655115
+random,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.012302185234028117
+cold_drug,lgbm_study,chem_logp_absdiff,Chemistry: descriptors & similarity,0.012272411282433273
+random,lgbm_study,chem_tanimoto,Chemistry: descriptors & similarity,0.012265702114819055
+cold_pair,lgbm_study,chem_tanimoto,Chemistry: descriptors & similarity,0.012264361282814433
+cold_pair,lgbm_study,chem_qed_absdiff,Chemistry: descriptors & similarity,0.012223417580796807
+cold_drug,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.012220215866038858
+random,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.012202091191492756
+cold_drug,lgbm_study,chem_tpsa_sum,Chemistry: descriptors & similarity,0.012119509752206234
+cold_drug,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.01210865479472562
+cold_cell,lgbm_full,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.012093274150827107
+cold_cell,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.0120847420173261
+cold_pair,lgbm_full,chem_logp_sum,Chemistry: descriptors & similarity,0.012065031837854762
+cold_cell,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.012037536701023711
+cold_pair,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.01198467268141914
+random,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.011976339697345397
+random,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.011974930781785515
+cold_pair,lgbm_study,chem_tpsa_sum,Chemistry: descriptors & similarity,0.011956365437163288
+cold_cell,lgbm_study,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.011923860044341187
+random,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.011881078795227767
+cold_cell,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.011864471579965017
+random,lgbm_study,n_drugcell_max_log,Screen history: in-fold counts,0.011852504665766693
+cold_cell,lgbm_full,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.011834590145093485
+cold_pair,lgbm_study,n_drugcell_max_log,Screen history: in-fold counts,0.011825416378479385
+cold_pair,lgbm_study,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.011788537480545527
+cold_pair,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.011777333268163171
+cold_pair,lgbm_study,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.011770824228960508
+cold_pair,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.011762046384960456
+cold_cell,lgbm_full,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.011755128387078234
+random,lgbm_mono,n_drugcell_max_log,Screen history: in-fold counts,0.011746351457243615
+random,lgbm_full,chem_tpsa_sum,Chemistry: descriptors & similarity,0.011714759825170494
+cold_drug,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.011697502863116464
+cold_drug,lgbm_mono,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.011697356992593355
+random,lgbm_study,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.01169467027695801
+cold_drug,lgbm_study,chem_qed_sum,Chemistry: descriptors & similarity,0.011687889811848292
+cold_drug,lgbm_mono,n_drugcell_max_log,Screen history: in-fold counts,0.011677694063539704
+cold_pair,lgbm_chem_bio,rna_pc13,Biology: RNA expression PCs,0.01164101029746433
+cold_drug,lgbm_mono,chem_logp_absdiff,Chemistry: descriptors & similarity,0.011634433877487936
+cold_drug,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.011625561526085286
+cold_drug,lgbm_study,n_drugcell_max_log,Screen history: in-fold counts,0.011624548464638423
+random,lgbm_study,chem_tpsa_sum,Chemistry: descriptors & similarity,0.011564047883563924
+random,lgbm_study,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.011560889906367916
+cold_cell,lgbm_full,chem_logp_absdiff,Chemistry: descriptors & similarity,0.011553726953231397
+cold_drug,lgbm_study,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.011513422308591722
+cold_pair,lgbm_mono,n_cell_log,Screen history: in-fold counts,0.011491297644165158
+cold_cell,lgbm_study,chem_tpsa_sum,Chemistry: descriptors & similarity,0.011487878033927264
+cold_drug,lgbm_mono,chem_tanimoto,Chemistry: descriptors & similarity,0.011477131079726343
+random,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.011468569537240242
+random,lgbm_study,chem_qed_absdiff,Chemistry: descriptors & similarity,0.011443779733548806
+cold_pair,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.011419244678322513
+random,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.011417203664975256
+cold_pair,lgbm_study,chem_logp_absdiff,Chemistry: descriptors & similarity,0.01138005303171367
+cold_cell,lgbm_mono,n_drugcell_max_log,Screen history: in-fold counts,0.011379471408781023
+random,lgbm_full,chem_tanimoto,Chemistry: descriptors & similarity,0.01135873368033212
+cold_drug,lgbm_study,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.011358205745818256
+cold_drug,lgbm_mono,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.011352003370954758
+cold_cell,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.011335027244229428
+cold_cell,lgbm_mono,n_cell_log,Screen history: in-fold counts,0.011329550026778773
+cold_cell,lgbm_full,chem_qed_absdiff,Chemistry: descriptors & similarity,0.011328918558902445
+cold_drug,lgbm_mono,chem_qed_absdiff,Chemistry: descriptors & similarity,0.011315486103152918
+cold_drug,lgbm_all_no_history,tgt_mut_max,Targets in the cell line,0.011284287032266187
+cold_pair,lgbm_full,chem_qed_sum,Chemistry: descriptors & similarity,0.011276360855341769
+cold_cell,lgbm_study,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.011271600721570395
+cold_cell,lgbm_study,chem_qed_absdiff,Chemistry: descriptors & similarity,0.011238946612448905
+random,lgbm_study,chem_logp_absdiff,Chemistry: descriptors & similarity,0.011232178064294109
+cold_cell,lgbm_mono,chem_logp_absdiff,Chemistry: descriptors & similarity,0.01121051767405992
+cold_cell,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.011209721917550722
+cold_cell,lgbm_chem_bio,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.011173494105268642
+cold_drug,lgbm_study,n_cell_log,Screen history: in-fold counts,0.011152824039374995
+random,lgbm_mono,chem_logp_absdiff,Chemistry: descriptors & similarity,0.01111526810653451
+cold_cell,lgbm_full,n_drugcell_max_log,Screen history: in-fold counts,0.011114755933581105
+cold_pair,lgbm_mono,chem_logp_absdiff,Chemistry: descriptors & similarity,0.011007992875981226
+cold_cell,lgbm_mono,chem_tanimoto,Chemistry: descriptors & similarity,0.010985253613309562
+cold_drug,lgbm_mono,n_drug_min_log,Screen history: in-fold counts,0.010971577066782402
+cold_drug,lgbm_chem_bio,rna_pc29,Biology: RNA expression PCs,0.010963055206143124
+random,lgbm_mono,chem_logp_sum,Chemistry: descriptors & similarity,0.010921650451445596
+random,lgbm_study,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010899063282471316
+cold_cell,lgbm_study,chem_logp_absdiff,Chemistry: descriptors & similarity,0.010837460638469654
+cold_pair,lgbm_study,chem_qed_sum,Chemistry: descriptors & similarity,0.010812011295738076
+cold_pair,lgbm_mono,chem_logp_sum,Chemistry: descriptors & similarity,0.01079838812514868
+cold_pair,lgbm_study,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010712236328979418
+random,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010708593808324882
+cold_cell,lgbm_study,n_drugcell_max_log,Screen history: in-fold counts,0.010688936621895996
+cold_cell,lgbm_study,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.010682098069451765
+random,lgbm_mono,chem_tanimoto,Chemistry: descriptors & similarity,0.010681546914232518
+cold_cell,lgbm_mono,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.010672540369024082
+cold_pair,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.01066423020181837
+random,lgbm_mono,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.010643010333480385
+cold_drug,lgbm_mono,chem_logp_sum,Chemistry: descriptors & similarity,0.010629252205257697
+cold_cell,lgbm_mono,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.010625971122180798
+cold_cell,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.01057263639919529
+random,lgbm_mono,n_drug_min_log,Screen history: in-fold counts,0.010567858515778532
+cold_cell,lgbm_study,chem_qed_sum,Chemistry: descriptors & similarity,0.010514392391256995
+cold_cell,lgbm_study,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010489026551592806
+random,lgbm_study,chem_qed_sum,Chemistry: descriptors & similarity,0.010476557442992826
+cold_drug,lgbm_mono,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.01046153012886381
+cold_drug,lgbm_mono,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.010450716220521926
+random,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.010445369209588834
+cold_pair,lgbm_mono,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.010439200350850872
+cold_pair,lgbm_mono,n_drug_min_log,Screen history: in-fold counts,0.010437870106829075
+cold_pair,lgbm_mono,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.010431845326451819
+cold_drug,lgbm_all_no_history,chem_qed_sum,Chemistry: descriptors & similarity,0.010417765687054234
+cold_drug,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.010412761675012379
+cold_cell,lgbm_mono,n_drug_min_log,Screen history: in-fold counts,0.010408217838818202
+cold_pair,lgbm_mono,chem_tanimoto,Chemistry: descriptors & similarity,0.01039790852245913
+random,lgbm_all,mono_hsa_expected,Monotherapy response,0.010356475561700407
+random,lgbm_mono,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.010328916079209978
+cold_cell,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.010233278628835921
+random,lgbm_mono,chem_tpsa_sum,Chemistry: descriptors & similarity,0.010202516917082814
+cold_cell,lgbm_mono,chem_logp_sum,Chemistry: descriptors & similarity,0.01018931127643651
+cold_pair,lgbm_mono,chem_qed_absdiff,Chemistry: descriptors & similarity,0.010186461447268397
+cold_pair,lgbm_all_no_history,chem_qed_sum,Chemistry: descriptors & similarity,0.01015865555013458
+cold_cell,lgbm_full,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.010156668181877491
+cold_cell,lgbm_mono,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.010155148881736518
+cold_cell,lgbm_mono,chem_qed_absdiff,Chemistry: descriptors & similarity,0.010116194263235085
+random,lgbm_mono,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.010105299866347358
+cold_pair,lgbm_mono,chem_qed_sum,Chemistry: descriptors & similarity,0.01008977864475036
+random,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.01002702158262103
+cold_drug,lgbm_mono,chem_qed_sum,Chemistry: descriptors & similarity,0.009994468252483846
+cold_pair,lgbm_mono,chem_tpsa_sum,Chemistry: descriptors & similarity,0.009976109193219363
+cold_pair,lgbm_all,mono_hsa_expected,Monotherapy response,0.009943219892852122
+cold_drug,lgbm_mono,chem_tpsa_sum,Chemistry: descriptors & similarity,0.009922173459409891
+cold_drug,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.009898152089694655
+cold_pair,lgbm_full,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.009861842350840743
+cold_cell,lgbm_chem_bio,rna_pc15,Biology: RNA expression PCs,0.009857455106882148
+random,lgbm_mono,chem_qed_sum,Chemistry: descriptors & similarity,0.009808322808838756
+cold_drug,lgbm_study,n_drug_min_log,Screen history: in-fold counts,0.00979547041534768
+cold_pair,lgbm_mono,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.009768909978077583
+random,lgbm_all_no_history,chem_qed_sum,Chemistry: descriptors & similarity,0.009756151055063859
+cold_pair,lgbm_study,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.009740150267777177
+cold_cell,lgbm_mono,chem_tpsa_sum,Chemistry: descriptors & similarity,0.009739369837232508
+random,lgbm_mono,chem_qed_absdiff,Chemistry: descriptors & similarity,0.00973459260452829
+random,lgbm_study,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.009729013866629983
+cold_drug,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.009712282797598405
+cold_cell,lgbm_mono,chem_qed_sum,Chemistry: descriptors & similarity,0.009590823234323989
+random,lgbm_study,n_drug_max_log,Screen history: in-fold counts,0.009560344764305236
+cold_drug,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.00944408179787619
+cold_pair,lgbm_study,n_drug_min_log,Screen history: in-fold counts,0.009373437458775575
+cold_pair,lgbm_full,n_drug_max_log,Screen history: in-fold counts,0.009350300221837108
+cold_drug,lgbm_study,n_drug_max_log,Screen history: in-fold counts,0.009325261245750423
+random,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.009236447500250775
+cold_cell,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.009186466719158057
+cold_cell,lgbm_all,mono_hsa_expected,Monotherapy response,0.009111457985113895
+cold_drug,lgbm_all_no_history,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.00909617869719317
+cold_pair,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.009079423799878696
+cold_cell,lgbm_all_no_history,chem_qed_sum,Chemistry: descriptors & similarity,0.00896847213890318
+cold_drug,lgbm_all,n_drug_min_log,Screen history: in-fold counts,0.008933629741994825
+cold_drug,lgbm_all,mono_hsa_expected,Monotherapy response,0.008910745249676921
+cold_cell,lgbm_study,n_drug_max_log,Screen history: in-fold counts,0.008829525386686542
+random,lgbm_all,n_drug_min_log,Screen history: in-fold counts,0.008793202217309714
+random,lgbm_full,n_drug_min_log,Screen history: in-fold counts,0.008702421669918992
+cold_pair,lgbm_chem_bio,rna_pc1,Biology: RNA expression PCs,0.00864202193871943
+random,lgbm_study,n_drug_min_log,Screen history: in-fold counts,0.008606629563589131
+cold_pair,lgbm_all,n_drug_min_log,Screen history: in-fold counts,0.008600882693194369
+random,lgbm_all_no_history,tgt_mut_min,Targets in the cell line,0.008587886359924204
+cold_drug,lgbm_all_no_history,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.00855317566917596
+cold_pair,lgbm_study,n_drug_max_log,Screen history: in-fold counts,0.008530276387010136
+cold_drug,lgbm_all,chem_logp_sum,Chemistry: descriptors & similarity,0.00847151314265434
+cold_pair,lgbm_all_no_history,tgt_mut_min,Targets in the cell line,0.008460542482705022
+cold_cell,lgbm_all_no_history,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.00841504682468961
+cold_drug,lgbm_all_no_history,chem_tanimoto,Chemistry: descriptors & similarity,0.008395914214255807
+cold_cell,lgbm_study,n_drug_min_log,Screen history: in-fold counts,0.008328177434922812
+random,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.008313109012927422
+cold_drug,lgbm_all_no_history,chem_tpsa_sum,Chemistry: descriptors & similarity,0.00830587585880651
+cold_pair,lgbm_all,n_drugcell_max_log,Screen history: in-fold counts,0.008294914657320589
+random,lgbm_all_no_history,chem_tpsa_sum,Chemistry: descriptors & similarity,0.008290891821659428
+cold_pair,lgbm_study,n_cell_log,Screen history: in-fold counts,0.008286642143404185
+cold_pair,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.008248359477009758
+cold_cell,lgbm_all_no_history,chem_tpsa_sum,Chemistry: descriptors & similarity,0.008203451273415662
+random,lgbm_all_no_history,chem_tanimoto,Chemistry: descriptors & similarity,0.008170957035690778
+cold_cell,lgbm_all_no_history,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.008146992308788731
+cold_pair,lgbm_all_no_history,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.008101438682619644
+cold_cell,lgbm_all_no_history,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.008093321057253484
+cold_pair,lgbm_all_no_history,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.008089294245803028
+cold_pair,lgbm_all_no_history,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.008087329628207676
+cold_pair,lgbm_all_no_history,chem_tpsa_sum,Chemistry: descriptors & similarity,0.007985831803705124
+cold_cell,lgbm_all,n_drug_min_log,Screen history: in-fold counts,0.007963849780069372
+cold_pair,lgbm_all,chem_logp_sum,Chemistry: descriptors & similarity,0.007960061906628199
+cold_cell,lgbm_all,chem_logp_sum,Chemistry: descriptors & similarity,0.007936530190451735
+random,lgbm_all_no_history,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.00793602483925542
+cold_drug,lgbm_all_no_history,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.007923464637696038
+cold_drug,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.007905272567528288
+cold_drug,lgbm_all_no_history,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007878632707561723
+cold_drug,lgbm_all,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.007872433293695587
+cold_drug,lgbm_all_no_history,chem_qed_absdiff,Chemistry: descriptors & similarity,0.007867848581045785
+cold_cell,lgbm_all,chem_tanimoto,Chemistry: descriptors & similarity,0.007856767620710739
+cold_pair,lgbm_all_no_history,chem_tanimoto,Chemistry: descriptors & similarity,0.007842020436952346
+cold_cell,lgbm_all_no_history,chem_tanimoto,Chemistry: descriptors & similarity,0.007831400457729459
+cold_drug,lgbm_all,chem_logp_absdiff,Chemistry: descriptors & similarity,0.007782633407853557
+cold_cell,lgbm_all_no_history,chem_qed_absdiff,Chemistry: descriptors & similarity,0.007778167301155252
+cold_drug,lgbm_all,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.007725421106297241
+cold_drug,lgbm_all,n_drugcell_max_log,Screen history: in-fold counts,0.007707735539557868
+cold_cell,lgbm_all_no_history,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007706623613398971
+random,lgbm_all_no_history,chem_qed_absdiff,Chemistry: descriptors & similarity,0.007683063919068842
+cold_drug,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.007667155663310439
+cold_drug,lgbm_all_no_history,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.007665826759797938
+cold_drug,lgbm_all,chem_tanimoto,Chemistry: descriptors & similarity,0.007661745113465518
+random,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.007658013465927284
+random,lgbm_all_no_history,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.0076553799029945415
+cold_pair,lgbm_all_no_history,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.007646219691676242
+cold_pair,lgbm_all_no_history,chem_logp_absdiff,Chemistry: descriptors & similarity,0.007644141186177817
+random,lgbm_all,chem_logp_sum,Chemistry: descriptors & similarity,0.0076330369876070345
+random,lgbm_all_no_history,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007632203674031209
+random,lgbm_all,chem_tanimoto,Chemistry: descriptors & similarity,0.007620660932453833
+random,lgbm_all,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.007608747266833373
+cold_pair,lgbm_all,chem_logp_absdiff,Chemistry: descriptors & similarity,0.007606829883915638
+cold_drug,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.0076000956782456865
+cold_pair,lgbm_all_no_history,fps_33,Chemistry: fingerprint bits,0.007596284885523768
+cold_pair,lgbm_all,chem_tanimoto,Chemistry: descriptors & similarity,0.007588141438653522
+random,lgbm_all_no_history,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.007557293644402503
+cold_pair,lgbm_all,chem_qed_sum,Chemistry: descriptors & similarity,0.007553949862915912
+random,lgbm_all,n_drugcell_max_log,Screen history: in-fold counts,0.0075529736838722905
+cold_cell,lgbm_all,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.007552624433847942
+cold_drug,lgbm_all_no_history,chem_logp_absdiff,Chemistry: descriptors & similarity,0.007551379324319869
+cold_cell,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.007550997727041966
+random,lgbm_all_no_history,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.007521477478552744
+cold_drug,lgbm_all,chem_qed_sum,Chemistry: descriptors & similarity,0.007509823937952212
+random,lgbm_all,chem_logp_absdiff,Chemistry: descriptors & similarity,0.007502246983331885
+cold_cell,lgbm_all_no_history,chem_mol_wt_sum,Chemistry: descriptors & similarity,0.007501188759588281
+cold_pair,lgbm_all_no_history,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007500204760023107
+cold_drug,lgbm_all,chem_qed_absdiff,Chemistry: descriptors & similarity,0.007475496869588459
+random,lgbm_all_no_history,fps_33,Chemistry: fingerprint bits,0.007467866683021049
+cold_pair,lgbm_all,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.007446572770279425
+cold_drug,lgbm_study,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007417620723847986
+cold_pair,lgbm_all_no_history,chem_qed_absdiff,Chemistry: descriptors & similarity,0.007384160978972951
+cold_pair,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007383262928200997
+cold_cell,lgbm_all,chem_logp_absdiff,Chemistry: descriptors & similarity,0.007367398459278594
+cold_cell,lgbm_all,chem_qed_sum,Chemistry: descriptors & similarity,0.007331255655946237
+cold_cell,lgbm_chem_bio,fps_33,Chemistry: fingerprint bits,0.007323463054754643
+cold_cell,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007319727750085732
+cold_pair,lgbm_all,chem_frac_csp3_absdiff,Chemistry: descriptors & similarity,0.007274587772757188
+cold_drug,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.007233817607473277
+random,lgbm_chem_bio,fps_136,Chemistry: fingerprint bits,0.0072127511362133955
+random,lgbm_full,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.007211123177282397
+cold_cell,lgbm_all,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.007210464716455232
+cold_drug,lgbm_all_no_history,tgt_mut_min,Targets in the cell line,0.007195238571968995
+cold_drug,lgbm_all,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.007182695277943185
+cold_pair,lgbm_chem_bio,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.007177360787248598
+cold_pair,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.007173156293953992
+cold_cell,lgbm_all,n_drugcell_max_log,Screen history: in-fold counts,0.007154757297843252
+random,lgbm_all,chem_qed_sum,Chemistry: descriptors & similarity,0.007149008410635143
+cold_pair,lgbm_chem_bio,fps_323,Chemistry: fingerprint bits,0.007125655993338892
+random,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.007123759182621882
+cold_cell,lgbm_all,chem_tpsa_sum,Chemistry: descriptors & similarity,0.00711926632699815
+random,lgbm_all_no_history,chem_logp_absdiff,Chemistry: descriptors & similarity,0.007101519096715597
+cold_cell,lgbm_all_no_history,tgt_mut_min,Targets in the cell line,0.007048986495676746
+random,lgbm_all,chem_frac_csp3_sum,Chemistry: descriptors & similarity,0.007045426822614329
+cold_pair,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.00702155629032834
+random,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.0069798660287643775
+cold_drug,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.006938307455806501
+random,lgbm_study,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.006938114827016419
+random,lgbm_all,chem_tpsa_sum,Chemistry: descriptors & similarity,0.006843100224272436
+cold_cell,lgbm_study,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.006839078926340399
+cold_cell,lgbm_chem_bio,chem_hba_sum,Chemistry: descriptors & similarity,0.006820562961677298
+cold_pair,lgbm_study,chem_heavy_atoms_sum,Chemistry: descriptors & similarity,0.006812113786532789
+cold_cell,lgbm_all_no_history,chem_logp_absdiff,Chemistry: descriptors & similarity,0.006800944387650665
+cold_cell,lgbm_all,chem_qed_absdiff,Chemistry: descriptors & similarity,0.006770278174177064
+cold_drug,lgbm_all_no_history,fps_33,Chemistry: fingerprint bits,0.006725417064604537
+cold_pair,lgbm_all,chem_tpsa_sum,Chemistry: descriptors & similarity,0.006707413382110532
+cold_drug,lgbm_all_no_history,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.006672502300347983
+cold_cell,lgbm_all_no_history,fps_33,Chemistry: fingerprint bits,0.006653652498650848
+random,lgbm_all,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.006635781918210147
+random,lgbm_all_no_history,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.00661435042785892
+cold_pair,lgbm_all,chem_tpsa_absdiff,Chemistry: descriptors & similarity,0.006505112083448366
+cold_cell,lgbm_chem_bio,fps_99,Chemistry: fingerprint bits,0.006486996970697917
+random,lgbm_chem_bio,fps_323,Chemistry: fingerprint bits,0.0064648256996529575
+cold_cell,lgbm_chem_bio,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.006363432840031713
+cold_drug,lgbm_chem_bio,fps_457,Chemistry: fingerprint bits,0.006332134505307912
+cold_pair,lgbm_chem_bio,fps_136,Chemistry: fingerprint bits,0.006296583524766638
+cold_pair,lgbm_all_no_history,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.006211799775030146
+cold_cell,lgbm_chem_bio,fps_323,Chemistry: fingerprint bits,0.006195514332328269
+cold_cell,lgbm_all_no_history,chem_mol_wt_absdiff,Chemistry: descriptors & similarity,0.0060270783252427025
+cold_drug,lgbm_chem_bio,chem_hba_absdiff,Chemistry: descriptors & similarity,0.005953479036422363
+cold_drug,lgbm_all_no_history,mech_cosine,Mechanism: target embedding,0.005910168641527844
+cold_pair,lgbm_all_no_history,tgt_n_min,Targets in the cell line,0.005888441689552641
+cold_drug,lgbm_study,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.0058483343107108635
+random,lgbm_study,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.00581056929248014
+cold_cell,lgbm_all_no_history,tgt_n_min,Targets in the cell line,0.005801084944820117
+cold_drug,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.0056772122171592915
+cold_pair,lgbm_study,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.00566523980034993
+cold_pair,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.0055709656986825395
+random,lgbm_all_no_history,mech_cosine,Mechanism: target embedding,0.005475230007161145
+random,lgbm_full,n_cell_log,Screen history: in-fold counts,0.005416364167818496
+cold_drug,lgbm_full,n_cell_log,Screen history: in-fold counts,0.005383118981694479
+cold_cell,lgbm_study,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.005326025051816514
+random,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.005259339875486674
+cold_drug,lgbm_full,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.00515945859450241
+cold_drug,lgbm_study,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.005087847265485856
+cold_pair,lgbm_study,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.005060325845895645
+cold_cell,lgbm_full,chem_heavy_atoms_absdiff,Chemistry: descriptors & similarity,0.0050348591704870395
+random,lgbm_full,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.005030648119027502
+cold_cell,lgbm_full,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.004986023225530098
+cold_cell,lgbm_study,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.004941562738495671
+cold_pair,lgbm_full,n_cell_log,Screen history: in-fold counts,0.004837716321034031
+random,lgbm_study,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.00480688872795416
+cold_pair,lgbm_full,chem_rot_bonds_sum,Chemistry: descriptors & similarity,0.0045935462828792
+cold_cell,lgbm_full,chem_hba_sum,Chemistry: descriptors & similarity,0.00449963613447102

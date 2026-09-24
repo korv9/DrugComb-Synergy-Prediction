@@ -1,41 +1,173 @@
 scheme,model,family,gain
-cold_cell,lgbm_chem_bio,Biology: RNA expression PCs,0.11499962616369246
-cold_cell,lgbm_chem_bio,Biology: tissue lineage,0.10752391789022274
-cold_cell,lgbm_chem_bio,Chemistry: descriptors & similarity,0.2665522645318648
-cold_cell,lgbm_chem_bio,Chemistry: fingerprint bits,0.51092419141422
-cold_cell,lgbm_full,Biology: RNA expression PCs,0.0070742582941641765
-cold_cell,lgbm_full,Biology: tissue lineage,0.0012410354258778483
-cold_cell,lgbm_full,Chemistry: descriptors & similarity,0.1715989531405128
-cold_cell,lgbm_full,Chemistry: fingerprint bits,0.16747641369995656
-cold_cell,lgbm_full,Screen history: in-fold counts,0.07052757301131742
-cold_cell,lgbm_full,Screen history: in-fold mean ZIP,0.5820817664281712
-cold_drug,lgbm_chem_bio,Biology: RNA expression PCs,0.11434531842977774
-cold_drug,lgbm_chem_bio,Biology: tissue lineage,0.08205356639838009
-cold_drug,lgbm_chem_bio,Chemistry: descriptors & similarity,0.28429874434728414
-cold_drug,lgbm_chem_bio,Chemistry: fingerprint bits,0.519302370824558
-cold_drug,lgbm_full,Biology: RNA expression PCs,0.00792741339869907
-cold_drug,lgbm_full,Biology: tissue lineage,0.00128810683934643
-cold_drug,lgbm_full,Chemistry: descriptors & similarity,0.18484493141616187
-cold_drug,lgbm_full,Chemistry: fingerprint bits,0.16668887701407822
-cold_drug,lgbm_full,Screen history: in-fold counts,0.061316068808114944
-cold_drug,lgbm_full,Screen history: in-fold mean ZIP,0.5779346025235994
-cold_pair,lgbm_chem_bio,Biology: RNA expression PCs,0.11560334956687253
-cold_pair,lgbm_chem_bio,Biology: tissue lineage,0.09163967678194125
-cold_pair,lgbm_chem_bio,Chemistry: descriptors & similarity,0.27225768870380457
-cold_pair,lgbm_chem_bio,Chemistry: fingerprint bits,0.5204992849473816
-cold_pair,lgbm_full,Biology: RNA expression PCs,0.006281302978543909
-cold_pair,lgbm_full,Biology: tissue lineage,0.0011976080510214583
-cold_pair,lgbm_full,Chemistry: descriptors & similarity,0.17361006554796085
-cold_pair,lgbm_full,Chemistry: fingerprint bits,0.16249710926663052
-cold_pair,lgbm_full,Screen history: in-fold counts,0.06867147933068436
-cold_pair,lgbm_full,Screen history: in-fold mean ZIP,0.5877424348251589
-random,lgbm_chem_bio,Biology: RNA expression PCs,0.11547906451894763
-random,lgbm_chem_bio,Biology: tissue lineage,0.09178165059557834
-random,lgbm_chem_bio,Chemistry: descriptors & similarity,0.273039779721531
-random,lgbm_chem_bio,Chemistry: fingerprint bits,0.519699505163943
-random,lgbm_full,Biology: RNA expression PCs,0.006516243008270142
-random,lgbm_full,Biology: tissue lineage,0.001364642058258257
-random,lgbm_full,Chemistry: descriptors & similarity,0.1745233839300279
-random,lgbm_full,Chemistry: fingerprint bits,0.16193613507575835
-random,lgbm_full,Screen history: in-fold counts,0.06660235348248486
-random,lgbm_full,Screen history: in-fold mean ZIP,0.5890572424452005
+cold_cell,lgbm_all,Biology: RNA expression PCs,0.005097569491393665
+cold_cell,lgbm_all,Biology: tissue lineage,0.0013921396357717622
+cold_cell,lgbm_all,Chemistry: descriptors & similarity,0.10575945866769208
+cold_cell,lgbm_all,Chemistry: fingerprint bits,0.09246220117495492
+cold_cell,lgbm_all,Context: source study,0.0004815741784152125
+cold_cell,lgbm_all,Mechanism: target embedding,0.11811723505716569
+cold_cell,lgbm_all,Monotherapy response,0.13367328180158258
+cold_cell,lgbm_all,Screen history: in-fold counts,0.09843619686795409
+cold_cell,lgbm_all,Screen history: in-fold mean ZIP,0.43486446454702504
+cold_cell,lgbm_all,Targets in the cell line,0.00971587857804491
+cold_cell,lgbm_all_no_history,Biology: RNA expression PCs,0.046526536973795544
+cold_cell,lgbm_all_no_history,Biology: tissue lineage,0.03666851470325009
+cold_cell,lgbm_all_no_history,Chemistry: descriptors & similarity,0.13573947065364309
+cold_cell,lgbm_all_no_history,Chemistry: fingerprint bits,0.1879526832819126
+cold_cell,lgbm_all_no_history,Context: source study,0.12829747439218028
+cold_cell,lgbm_all_no_history,Mechanism: target embedding,0.13568378564864406
+cold_cell,lgbm_all_no_history,Monotherapy response,0.2924143069376344
+cold_cell,lgbm_all_no_history,Targets in the cell line,0.036717227408939894
+cold_cell,lgbm_chem_bio,Biology: RNA expression PCs,0.1148121324069065
+cold_cell,lgbm_chem_bio,Biology: tissue lineage,0.10751319561568656
+cold_cell,lgbm_chem_bio,Chemistry: descriptors & similarity,0.26616789351508285
+cold_cell,lgbm_chem_bio,Chemistry: fingerprint bits,0.5115067784623241
+cold_cell,lgbm_full,Biology: RNA expression PCs,0.005708163540569887
+cold_cell,lgbm_full,Biology: tissue lineage,0.0014388492456875728
+cold_cell,lgbm_full,Chemistry: descriptors & similarity,0.17099727364589676
+cold_cell,lgbm_full,Chemistry: fingerprint bits,0.1669223239733717
+cold_cell,lgbm_full,Screen history: in-fold counts,0.0702147853496365
+cold_cell,lgbm_full,Screen history: in-fold mean ZIP,0.5847186042448377
+cold_cell,lgbm_mono,Biology: RNA expression PCs,0.008384521505829634
+cold_cell,lgbm_mono,Biology: tissue lineage,0.0017285787203036177
+cold_cell,lgbm_mono,Chemistry: descriptors & similarity,0.1509595863715951
+cold_cell,lgbm_mono,Chemistry: fingerprint bits,0.12933784198066414
+cold_cell,lgbm_mono,Context: source study,0.0004935361545659344
+cold_cell,lgbm_mono,Monotherapy response,0.1437809630629309
+cold_cell,lgbm_mono,Screen history: in-fold counts,0.10031355711335971
+cold_cell,lgbm_mono,Screen history: in-fold mean ZIP,0.46500141509075094
+cold_cell,lgbm_study,Biology: RNA expression PCs,0.006598526960539477
+cold_cell,lgbm_study,Biology: tissue lineage,0.001247400687011615
+cold_cell,lgbm_study,Chemistry: descriptors & similarity,0.17054687360130372
+cold_cell,lgbm_study,Chemistry: fingerprint bits,0.1673879488770215
+cold_cell,lgbm_study,Context: source study,0.00061497173048378
+cold_cell,lgbm_study,Screen history: in-fold counts,0.06893008800369109
+cold_cell,lgbm_study,Screen history: in-fold mean ZIP,0.5846741901399488
+cold_drug,lgbm_all,Biology: RNA expression PCs,0.006458665438974984
+cold_drug,lgbm_all,Biology: tissue lineage,0.0013711150693831275
+cold_drug,lgbm_all,Chemistry: descriptors & similarity,0.10956417787504703
+cold_drug,lgbm_all,Chemistry: fingerprint bits,0.09608605815851495
+cold_drug,lgbm_all,Context: source study,0.0006223335470466976
+cold_drug,lgbm_all,Mechanism: target embedding,0.11733057471045633
+cold_drug,lgbm_all,Monotherapy response,0.13617997805727322
+cold_drug,lgbm_all,Screen history: in-fold counts,0.08516119051983036
+cold_drug,lgbm_all,Screen history: in-fold mean ZIP,0.43685902410165395
+cold_drug,lgbm_all,Targets in the cell line,0.010366882521819283
+cold_drug,lgbm_all_no_history,Biology: RNA expression PCs,0.05405969234684166
+cold_drug,lgbm_all_no_history,Biology: tissue lineage,0.03698372343292097
+cold_drug,lgbm_all_no_history,Chemistry: descriptors & similarity,0.14262065892553388
+cold_drug,lgbm_all_no_history,Chemistry: fingerprint bits,0.20030140684350575
+cold_drug,lgbm_all_no_history,Context: source study,0.10929674634609689
+cold_drug,lgbm_all_no_history,Mechanism: target embedding,0.138010094979622
+cold_drug,lgbm_all_no_history,Monotherapy response,0.28374937491542634
+cold_drug,lgbm_all_no_history,Targets in the cell line,0.0349783022100525
+cold_drug,lgbm_chem_bio,Biology: RNA expression PCs,0.11427018504599241
+cold_drug,lgbm_chem_bio,Biology: tissue lineage,0.08243875076639302
+cold_drug,lgbm_chem_bio,Chemistry: descriptors & similarity,0.282260367828501
+cold_drug,lgbm_chem_bio,Chemistry: fingerprint bits,0.5210306963591135
+cold_drug,lgbm_full,Biology: RNA expression PCs,0.008132015155706194
+cold_drug,lgbm_full,Biology: tissue lineage,0.0014174901036900771
+cold_drug,lgbm_full,Chemistry: descriptors & similarity,0.18313774839494124
+cold_drug,lgbm_full,Chemistry: fingerprint bits,0.1667289323561899
+cold_drug,lgbm_full,Screen history: in-fold counts,0.06283133126812439
+cold_drug,lgbm_full,Screen history: in-fold mean ZIP,0.5777524827213482
+cold_drug,lgbm_mono,Biology: RNA expression PCs,0.010782500057858635
+cold_drug,lgbm_mono,Biology: tissue lineage,0.0016107784514168735
+cold_drug,lgbm_mono,Chemistry: descriptors & similarity,0.15822224132955368
+cold_drug,lgbm_mono,Chemistry: fingerprint bits,0.13367204901462196
+cold_drug,lgbm_mono,Context: source study,0.0006160001544913833
+cold_drug,lgbm_mono,Monotherapy response,0.14692061398812375
+cold_drug,lgbm_mono,Screen history: in-fold counts,0.09352951954078476
+cold_drug,lgbm_mono,Screen history: in-fold mean ZIP,0.45464629746314894
+cold_drug,lgbm_study,Biology: RNA expression PCs,0.008741019158826345
+cold_drug,lgbm_study,Biology: tissue lineage,0.0014220682839559276
+cold_drug,lgbm_study,Chemistry: descriptors & similarity,0.18476844445075039
+cold_drug,lgbm_study,Chemistry: fingerprint bits,0.16700317245936383
+cold_drug,lgbm_study,Context: source study,0.0007672098257580362
+cold_drug,lgbm_study,Screen history: in-fold counts,0.06700717760496792
+cold_drug,lgbm_study,Screen history: in-fold mean ZIP,0.5702909082163775
+cold_pair,lgbm_all,Biology: RNA expression PCs,0.005812400291771266
+cold_pair,lgbm_all,Biology: tissue lineage,0.0011515418605252483
+cold_pair,lgbm_all,Chemistry: descriptors & similarity,0.10354043687867558
+cold_pair,lgbm_all,Chemistry: fingerprint bits,0.09015481056122626
+cold_pair,lgbm_all,Context: source study,0.0012057160031702676
+cold_pair,lgbm_all,Mechanism: target embedding,0.1142598806988336
+cold_pair,lgbm_all,Monotherapy response,0.13851984779838247
+cold_pair,lgbm_all,Screen history: in-fold counts,0.09001185774713588
+cold_pair,lgbm_all,Screen history: in-fold mean ZIP,0.44593530284714994
+cold_pair,lgbm_all,Targets in the cell line,0.009408205313129494
+cold_pair,lgbm_all_no_history,Biology: RNA expression PCs,0.05197687757629251
+cold_pair,lgbm_all_no_history,Biology: tissue lineage,0.03825786648600796
+cold_pair,lgbm_all_no_history,Chemistry: descriptors & similarity,0.139200372450752
+cold_pair,lgbm_all_no_history,Chemistry: fingerprint bits,0.1910595244808256
+cold_pair,lgbm_all_no_history,Context: source study,0.11813527128339014
+cold_pair,lgbm_all_no_history,Mechanism: target embedding,0.13609746352733054
+cold_pair,lgbm_all_no_history,Monotherapy response,0.28668742194529817
+cold_pair,lgbm_all_no_history,Targets in the cell line,0.03858520225010303
+cold_pair,lgbm_chem_bio,Biology: RNA expression PCs,0.11452044658165755
+cold_pair,lgbm_chem_bio,Biology: tissue lineage,0.09165004248146374
+cold_pair,lgbm_chem_bio,Chemistry: descriptors & similarity,0.27401410336239124
+cold_pair,lgbm_chem_bio,Chemistry: fingerprint bits,0.5198154075744875
+cold_pair,lgbm_full,Biology: RNA expression PCs,0.006882058243254614
+cold_pair,lgbm_full,Biology: tissue lineage,0.0013017943712964773
+cold_pair,lgbm_full,Chemistry: descriptors & similarity,0.173875446294836
+cold_pair,lgbm_full,Chemistry: fingerprint bits,0.160295175037278
+cold_pair,lgbm_full,Screen history: in-fold counts,0.06440685829898009
+cold_pair,lgbm_full,Screen history: in-fold mean ZIP,0.5932386677543549
+cold_pair,lgbm_mono,Biology: RNA expression PCs,0.009566428053944141
+cold_pair,lgbm_mono,Biology: tissue lineage,0.0015691197063450472
+cold_pair,lgbm_mono,Chemistry: descriptors & similarity,0.14975648248769047
+cold_pair,lgbm_mono,Chemistry: fingerprint bits,0.12682311657374232
+cold_pair,lgbm_mono,Context: source study,0.0005443897936571305
+cold_pair,lgbm_mono,Monotherapy response,0.14663954556094067
+cold_pair,lgbm_mono,Screen history: in-fold counts,0.09667334127208417
+cold_pair,lgbm_mono,Screen history: in-fold mean ZIP,0.4684275765515961
+cold_pair,lgbm_study,Biology: RNA expression PCs,0.0072383266761561664
+cold_pair,lgbm_study,Biology: tissue lineage,0.00125198331582243
+cold_pair,lgbm_study,Chemistry: descriptors & similarity,0.17311298885140516
+cold_pair,lgbm_study,Chemistry: fingerprint bits,0.16295404954780018
+cold_pair,lgbm_study,Context: source study,0.000722508509898637
+cold_pair,lgbm_study,Screen history: in-fold counts,0.06139249610701044
+cold_pair,lgbm_study,Screen history: in-fold mean ZIP,0.593327646991907
+random,lgbm_all,Biology: RNA expression PCs,0.005176155298959849
+random,lgbm_all,Biology: tissue lineage,0.0013208465161623233
+random,lgbm_all,Chemistry: descriptors & similarity,0.1034827182506316
+random,lgbm_all,Chemistry: fingerprint bits,0.09229020326767738
+random,lgbm_all,Context: source study,0.0010947273973996583
+random,lgbm_all,Mechanism: target embedding,0.11517402782402471
+random,lgbm_all,Monotherapy response,0.13872583197862776
+random,lgbm_all,Screen history: in-fold counts,0.07930743543182116
+random,lgbm_all,Screen history: in-fold mean ZIP,0.45397456662290514
+random,lgbm_all,Targets in the cell line,0.009453487411790416
+random,lgbm_all_no_history,Biology: RNA expression PCs,0.05203773736871892
+random,lgbm_all_no_history,Biology: tissue lineage,0.03797767593322829
+random,lgbm_all_no_history,Chemistry: descriptors & similarity,0.1372403757766908
+random,lgbm_all_no_history,Chemistry: fingerprint bits,0.19299042559739335
+random,lgbm_all_no_history,Context: source study,0.11819671563501828
+random,lgbm_all_no_history,Mechanism: target embedding,0.13388815226087028
+random,lgbm_all_no_history,Monotherapy response,0.28859435203614453
+random,lgbm_all_no_history,Targets in the cell line,0.03907456539193557
+random,lgbm_chem_bio,Biology: RNA expression PCs,0.1154105919987748
+random,lgbm_chem_bio,Biology: tissue lineage,0.0922226610533622
+random,lgbm_chem_bio,Chemistry: descriptors & similarity,0.2746052843952478
+random,lgbm_chem_bio,Chemistry: fingerprint bits,0.5177614625526151
+random,lgbm_full,Biology: RNA expression PCs,0.00646983173337255
+random,lgbm_full,Biology: tissue lineage,0.0012660070796976953
+random,lgbm_full,Chemistry: descriptors & similarity,0.1736804140029533
+random,lgbm_full,Chemistry: fingerprint bits,0.1620726647194823
+random,lgbm_full,Screen history: in-fold counts,0.058848244587699355
+random,lgbm_full,Screen history: in-fold mean ZIP,0.5976628378767948
+random,lgbm_mono,Biology: RNA expression PCs,0.009220044364888278
+random,lgbm_mono,Biology: tissue lineage,0.0017709390482082879
+random,lgbm_mono,Chemistry: descriptors & similarity,0.15118352618311381
+random,lgbm_mono,Chemistry: fingerprint bits,0.12761727975624348
+random,lgbm_mono,Context: source study,0.0004928057670492266
+random,lgbm_mono,Monotherapy response,0.14700028431505147
+random,lgbm_mono,Screen history: in-fold counts,0.09726056974959522
+random,lgbm_mono,Screen history: in-fold mean ZIP,0.46545455081585024
+random,lgbm_study,Biology: RNA expression PCs,0.006840538226630375
+random,lgbm_study,Biology: tissue lineage,0.001293789602791847
+random,lgbm_study,Chemistry: descriptors & similarity,0.17183707051326377
+random,lgbm_study,Chemistry: fingerprint bits,0.16447121268306403
+random,lgbm_study,Context: source study,0.0007190882224486485
+random,lgbm_study,Screen history: in-fold counts,0.07667329037906474
+random,lgbm_study,Screen history: in-fold mean ZIP,0.5781650103727366
