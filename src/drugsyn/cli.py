@@ -6,14 +6,28 @@ import argparse
 import logging
 import time
 
-from . import build, cells, download, drugs, figures, ingest, model, report, warehouse
+from . import (
+    build,
+    cells,
+    download,
+    drugs,
+    figures,
+    ingest,
+    model,
+    monotherapy,
+    report,
+    targets,
+    warehouse,
+)
 from .config import Paths, load_config
 
 STAGES = {
     "download": download.run,
     "ingest": ingest.run,
+    "monotherapy": monotherapy.run,
     "drugs": drugs.run,
     "cells": cells.run,
+    "targets": targets.run,
     "build": build.run,
     "warehouse": warehouse.run,
     "train": model.run,
@@ -21,7 +35,8 @@ STAGES = {
     "report": report.run,
 }
 PIPELINES = {
-    "data": ["download", "ingest", "drugs", "cells", "build", "warehouse"],
+    "data": ["download", "ingest", "monotherapy", "drugs", "cells", "targets", "build",
+             "warehouse"],
     "all": list(STAGES),
 }
 

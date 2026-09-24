@@ -12,7 +12,7 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import average_precision_score, mean_squared_error, r2_score
 
 from .config import Paths
-from .features import family, history_features, history_features_oof, static_features
+from .features import family, history_features, history_features_oof, select, static_features
 from .splits import make_folds
 
 log = logging.getLogger(__name__)
@@ -21,7 +21,11 @@ MODELS = {
     "mean": "Global mean",
     "history_ridge": "Screen history (ridge on in-fold means)",
     "lgbm_chem_bio": "LightGBM: chemistry + biology",
-    "lgbm_full": "LightGBM: chemistry + biology + history",
+    "lgbm_full": "LightGBM: + screen history",
+    "lgbm_study": "LightGBM: + study",
+    "lgbm_mono": "LightGBM: + monotherapy",
+    "lgbm_all": "LightGBM: + targets (all features)",
+    "lgbm_all_no_history": "LightGBM: all features except screen history",
 }
 
 
@@ -65,11 +69,13 @@ def evaluate(fact: pd.DataFrame, static: pd.DataFrame, cfg: dict):
             ridge = Ridge(alpha=1.0).fit(h_tr.to_numpy(), y[tr])
             out["history_ridge"] = ridge.predict(h_te.to_numpy())
 
-            for name, x_tr, x_te in [
-                ("lgbm_chem_bio", static.iloc[tr], static.iloc[te]),
-                ("lgbm_full", pd.concat([static.iloc[tr], h_tr], axis=1),
-                 pd.concat([static.iloc[te], h_te], axis=1)),
-            ]:
+            all_tr = pd.concat([static.iloc[tr], h_tr], axis=1)
+            all_te = pd.concat([static.iloc[te], h_te], axis=1)
+            for name, groups in mcfg["feature_sets"].items():
+                cols = select(all_tr.columns, groups)
+                if not cols:
+                    continue
+                x_tr, x_te = all_tr[cols], all_te[cols]
                 model = _lgbm(mcfg["lgbm"], seed).fit(x_tr, y[tr])
                 out[name] = model.predict(x_te)
                 gain = model.booster_.feature_importance("gain")
@@ -85,8 +91,10 @@ def evaluate(fact: pd.DataFrame, static: pd.DataFrame, cfg: dict):
                 "scheme": scheme, "fold": fold, "row": te, "y": y[te],
                 **{f"pred_{k}": v.astype(np.float32) for k, v in out.items()},
             }))
-            log.info("%-9s fold %d: n_train=%d n_test=%d  r(lgbm_full)=%.3f  (%.0fs)",
-                     scheme, fold, len(tr), len(te), rows[-1]["pearson"], time.time() - t0)
+            summary = "  ".join(f"{r['model']}={r['pearson']:.3f}" for r in rows[-len(out):]
+                                if r["model"].startswith("lgbm"))
+            log.info("%-9s fold %d: n_train=%d n_test=%d  %s  (%.0fs)",
+                     scheme, fold, len(tr), len(te), summary, time.time() - t0)
 
     return pd.DataFrame(rows), pd.concat(preds, ignore_index=True), pd.concat(importances)
 
@@ -107,9 +115,15 @@ def run(cfg: dict, paths: Paths) -> None:
         fact = fact.sample(max_rows, random_state=cfg["model"]["seed"])
     fact = fact.reset_index(drop=True)
 
+    def optional(name):
+        p = paths.processed / name
+        return pd.read_parquet(p) if p.exists() else None
+
     static = static_features(
         fact, pd.read_parquet(paths.dim_drug), pd.read_parquet(paths.drug_fingerprints),
         pd.read_parquet(paths.dim_cell), pd.read_parquet(paths.cell_rna_pcs),
+        mechanism=optional("drug_mechanism.parquet"),
+        drug_cell=optional("drug_cell_targets.parquet"),
     )
     log.info("static feature matrix: %s", static.shape)
 

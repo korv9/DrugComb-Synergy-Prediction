@@ -11,7 +11,6 @@ mithramycin + vemurafenib,50,17.14,9.11,0.72
 estramustine phosphate sodium + docetaxel,56,16.61,11.96,0.661
 cabazitaxel + tamoxifen,60,16.43,9.82,0.7
 tamoxifen + dactinomycin,54,16.17,9.45,0.741
-abt 263 + bardoxolone methyl,10,16.15,16.41,0.6
 abiraterone + dactinomycin,59,15.58,11.52,0.559
 estramustine phosphate sodium + paclitaxel,58,15.24,8.22,0.707
 ridaforolimus + dactolisib,39,15.2,7.64,0.769
@@ -24,3 +23,4 @@ pazopanib + dactinomycin,60,13.44,10.95,0.45
 cabazitaxel + retinoic acid,60,13.4,9.2,0.583
 tamoxifen + paclitaxel,55,13.25,8.34,0.6
 dactinomycin + fulvestrant,56,13.14,10.77,0.571
+mitotane + bleomycin,60,13.07,7.87,0.633

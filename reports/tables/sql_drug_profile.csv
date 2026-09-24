@@ -1,51 +1,51 @@
 drug_name,combinations,partners,cell_lines,mean_zip,share_synergistic
-temozolomide,9172,1936,95,1.91,0.126
-ruxolitinib,8982,2425,69,2.86,0.127
-sunitinib,7545,384,96,-0.22,0.049
-vorinostat,7508,409,97,-1.18,0.023
-sorafenib,7440,376,97,-0.72,0.048
-dasatinib,7373,224,102,0.08,0.052
-doxorubicin,7312,500,103,-1.28,0.016
-erlotinib,7270,164,96,0.34,0.051
-lapatinib,7209,126,96,0.13,0.047
-5 fluorouracil,7098,369,95,-3.28,0.025
-7 ethyl 10 hydroxycamptothecin,6947,400,95,-2.44,0.028
-mitomycin c,6945,265,98,-1.9,0.035
-an 265,6942,368,95,-2.28,0.024
-methotrexate,6930,494,98,-2.07,0.032
-demethyepipodophyll-otoxin,6924,208,97,-1.75,0.031
-bortezomib,6923,408,100,-0.34,0.027
-vinblastine,6859,369,95,-0.32,0.046
-topotecan,6800,156,97,-2.73,0.021
-oxaliplatin,6745,118,94,-3.6,0.015
-cyclophosphamide,6723,120,96,0.17,0.029
-paclitaxel,6444,121,97,-0.31,0.081
-gefitinib,6414,422,69,-1.52,0.065
-everolimus,6374,451,71,-1.76,0.035
-altretamine,6302,355,65,0.31,0.032
-chlorambucil,6299,355,64,-4.43,0.01
-tamoxifen,6265,421,69,0.14,0.068
-cytarabine,6262,412,68,-2.94,0.008
-allopurinol,6228,355,65,-1.73,0.012
-mitoxantrone,6214,355,65,-0.14,0.061
-anastrozole,6210,355,65,-1.02,0.02
-hydroxyurea,6198,355,65,-0.82,0.02
-clofarabine,6189,355,65,-2.23,0.01
-pazopanib,6179,356,67,0.77,0.074
-busulfan,6171,355,65,-2.34,0.014
-imatinib,6167,357,67,0.26,0.041
-thiotepa,6166,354,64,-4.01,0.007
-niapent,6165,356,66,-1.65,0.019
-raloxifene,6165,176,66,1.09,0.04
-thalidomide,6162,355,65,-0.63,0.031
-carmustine,6161,355,64,-2.27,0.015
-mitotane,6142,355,65,-0.28,0.05
-6 mercaptopurine,6141,357,67,-5.01,0.019
-araac,6141,358,71,-2.47,0.011
-lenalidomide,6118,184,66,-1.89,0.013
-docetaxel,6052,417,70,0.26,0.108
-crizotinib,6029,145,66,-0.34,0.03
-dexrazoxane,6024,104,64,-3.09,0.017
-exemestane,6023,104,64,-0.64,0.01
-melphalan,6022,104,63,-2.05,0.017
-dacarbazine,6022,104,64,-1.15,0.021
+doxorubicin,12329,500,103,-1.45,0.027
+temozolomide,9373,1936,95,1.85,0.124
+ruxolitinib,9276,2425,69,2.84,0.126
+sunitinib,7753,384,96,-0.23,0.049
+vorinostat,7717,409,97,-1.2,0.023
+sorafenib,7638,376,97,-0.7,0.049
+dasatinib,7583,224,102,0.07,0.052
+erlotinib,7479,164,96,0.34,0.051
+lapatinib,7415,126,96,0.15,0.049
+5 fluorouracil,7285,369,95,-3.26,0.024
+crizotinib,7209,145,66,-0.42,0.033
+bortezomib,7119,408,100,-0.35,0.026
+mitomycin c,7072,265,98,-1.91,0.034
+7 ethyl 10 hydroxycamptothecin,7072,400,95,-2.45,0.028
+an 265,7069,368,95,-2.28,0.024
+demethyepipodophyll-otoxin,7050,208,97,-1.76,0.031
+methotrexate,7047,494,98,-2.09,0.032
+vinblastine,6976,369,95,-0.33,0.046
+topotecan,6857,156,97,-2.74,0.021
+cyclophosphamide,6850,120,96,0.18,0.029
+oxaliplatin,6802,118,94,-3.6,0.015
+raloxifene,6735,176,66,1.23,0.046
+paclitaxel,6557,121,97,-0.32,0.081
+pazopanib,6533,356,67,0.84,0.074
+gefitinib,6524,422,69,-1.48,0.066
+everolimus,6431,451,71,-1.78,0.035
+altretamine,6413,355,65,0.31,0.032
+chlorambucil,6410,355,64,-4.4,0.011
+vemurafenib,6356,107,71,1.53,0.071
+tamoxifen,6322,421,69,0.14,0.068
+cytarabine,6317,412,68,-2.97,0.008
+allopurinol,6283,355,65,-1.71,0.012
+vandetanib,6277,105,66,-0.28,0.049
+abiraterone,6273,104,66,0.33,0.059
+mitoxantrone,6268,355,65,-0.15,0.061
+anastrozole,6266,355,65,-1.03,0.02
+vismodegib,6263,105,69,1.0,0.085
+hydroxyurea,6254,355,65,-0.83,0.02
+axitinib,6254,105,66,0.19,0.037
+clofarabine,6245,355,65,-2.24,0.01
+lenalidomide,6227,184,66,-1.87,0.013
+busulfan,6225,355,65,-2.33,0.014
+imatinib,6223,357,67,0.27,0.04
+niapent,6222,356,66,-1.64,0.018
+thiotepa,6221,354,64,-4.0,0.007
+thalidomide,6217,355,65,-0.61,0.032
+carmustine,6217,355,64,-2.28,0.015
+mitotane,6199,355,65,-0.25,0.055
+araac,6197,358,71,-2.49,0.011
+6 mercaptopurine,6197,357,67,-5.01,0.019

@@ -32,13 +32,24 @@ SCHEME_LABELS = {
     "cold_drug": "Unseen drug",
     "cold_cell": "Unseen cell line",
 }
-MODEL_ORDER = ["mean", "history_ridge", "lgbm_chem_bio", "lgbm_full"]
+MODEL_ORDER = ["mean", "history_ridge", "lgbm_chem_bio", "lgbm_full", "lgbm_all"]
 MODEL_LABELS = {
     "mean": "Global mean",
     "history_ridge": "Screen-history baseline",
     "lgbm_chem_bio": "LightGBM · chemistry + biology",
     "lgbm_full": "LightGBM · + screen history",
+    "lgbm_study": "LightGBM · + study",
+    "lgbm_mono": "LightGBM · + monotherapy",
+    "lgbm_all": "LightGBM · + targets (all)",
+    "lgbm_all_no_history": "LightGBM · all but screen history",
 }
+LADDER = ["lgbm_chem_bio", "lgbm_full", "lgbm_study", "lgbm_mono", "lgbm_all"]
+LADDER_LABELS = ["Chemistry\n+ biology", "+ screen\nhistory", "+ study", "+ mono-\ntherapy",
+                 "+ targets"]
+
+
+def _best_model(models) -> str:
+    return next(m for m in ("lgbm_all", "lgbm_full", "lgbm_chem_bio") if m in set(models))
 
 
 def _style() -> None:
@@ -227,9 +238,33 @@ def fig_lineage(paths: Paths) -> None:
     _save(fig, paths, "an_04_synergy_by_lineage")
 
 
+def fig_study(paths: Paths) -> None:
+    t = pd.read_csv(paths.tables / "sql_study_overview.csv")
+    if len(t) < 2 or "q25" not in t:
+        return
+    t = t.sort_values("median_zip")
+    fig, ax = plt.subplots(figsize=(8, 0.5 * len(t) + 1.6))
+    y = np.arange(len(t))
+    ax.hlines(y, t["q25"], t["q75"], color=BLUE_RAMP[1], lw=6, capstyle="round")
+    ax.scatter(t["median_zip"], y, color=SERIES[0], s=50, zorder=3,
+               edgecolor=SURFACE, linewidth=2)
+    for yi, (_, r) in zip(y, t.iterrows()):
+        ax.text(r["q75"] + 0.6, yi, f"sd {r['sd_zip']:.1f}", va="center", fontsize=8.5,
+                color=INK_2)
+    ax.axvline(0, color=AXIS, lw=0.8)
+    names = {"unknown": "no dose-response data"}
+    ax.set_yticks(y, [f"{names.get(s, s)}  ({_fmt(n)})"
+                      for s, n in zip(t["study"], t["combinations"])])
+    ax.grid(axis="y", visible=False)
+    ax.set_xlabel("ZIP synergy score (median, interquartile range)")
+    ax.set_title("Synergy by source study", pad=22)
+    _subtitle(ax, "ZIP per study pooled in DrugCombDB; combinations in brackets")
+    _save(fig, paths, "an_08_synergy_by_study")
+
+
 def fig_coverage(paths: Paths) -> None:
-    fact = pd.read_parquet(paths.fact, columns=["pair_key"])
-    per_pair = fact["pair_key"].value_counts()
+    fact = pd.read_parquet(paths.fact, columns=["pair_key", "cell_key"])
+    per_pair = fact.groupby("pair_key")["cell_key"].nunique()
     bins = [1, 2, 3, 6, 11, 21, 41, 81, np.inf]
     labels = ["1", "2", "3–5", "6–10", "11–20", "21–40", "41–80", "80+"]
     cats = pd.cut(per_pair, bins, right=False, labels=labels).value_counts().reindex(labels)
@@ -330,7 +365,7 @@ def fig_performance(paths: Paths, ceiling: float | None) -> None:
 
 def fig_feature_families(paths: Paths) -> None:
     fam = pd.read_csv(paths.tables / "feature_importance_family.csv")
-    fam = fam[fam["model"] == "lgbm_full"]
+    fam = fam[fam["model"] == _best_model(fam["model"])]
     schemes = [s for s in ("random", "cold_drug") if s in set(fam["scheme"])]
     if not schemes:
         return
@@ -354,14 +389,18 @@ def fig_feature_families(paths: Paths) -> None:
 def fig_pred_vs_obs(paths: Paths, scheme: str = "cold_pair") -> None:
     if not paths.predictions.exists():
         return
-    p = pd.read_parquet(paths.predictions, columns=["scheme", "y", "pred_lgbm_full"])
-    p = p[p["scheme"] == scheme]
+    import pyarrow.parquet as pq
+
+    cols = pq.read_schema(paths.predictions).names
+    best = "pred_" + _best_model([c.removeprefix("pred_") for c in cols])
+    p = pd.read_parquet(paths.predictions, columns=["scheme", "y", best])
+    p = p[p["scheme"] == scheme].rename(columns={best: "pred"})
     if p.empty:
         return
-    r = np.corrcoef(p["y"], p["pred_lgbm_full"])[0, 1]
+    r = np.corrcoef(p["y"], p["pred"])[0, 1]
     lim = (-40, 40)
     fig, ax = plt.subplots(figsize=(5.2, 5))
-    hb = ax.hexbin(p["pred_lgbm_full"].clip(*lim), p["y"].clip(*lim), gridsize=45, cmap=SEQ,
+    hb = ax.hexbin(p["pred"].clip(*lim), p["y"].clip(*lim), gridsize=45, cmap=SEQ,
                    bins="log", mincnt=1, linewidths=0)
     ax.plot(lim, lim, color=INK_2, lw=0.8, ls=(0, (3, 3)))
     ax.set_xlim(lim)
@@ -371,8 +410,33 @@ def fig_pred_vs_obs(paths: Paths, scheme: str = "cold_pair") -> None:
     ax.text(0.03, 0.95, f"Pearson r = {r:.2f}", transform=ax.transAxes, va="top", fontsize=9)
     fig.colorbar(hb, ax=ax, shrink=0.7, label="Combinations (log)").outline.set_visible(False)
     ax.set_title("Predictions for unseen drug pairs", pad=22)
-    _subtitle(ax, "LightGBM with all features, out-of-fold")
+    _subtitle(ax, f"{MODEL_LABELS[best.removeprefix('pred_')]}, out-of-fold")
     _save(fig, paths, "ml_03_pred_vs_obs")
+
+
+def fig_ablation(paths: Paths) -> None:
+    m = pd.read_csv(paths.tables / "metrics.csv")
+    ladder = [x for x in LADDER if x in set(m["model"])]
+    if len(ladder) < 3:
+        return
+    labels = [LADDER_LABELS[LADDER.index(x)] for x in ladder]
+    schemes = [s for s in SCHEME_LABELS if s in set(m["scheme"])]
+    fig, ax = plt.subplots(figsize=(8.5, 4.6))
+    x = np.arange(len(ladder))
+    for scheme, color in zip(schemes, SERIES):
+        sub = m[m["scheme"] == scheme].set_index("model").reindex(ladder)
+        ax.plot(x, sub["pearson"], color=color, lw=2, marker="o", ms=7,
+                markeredgecolor=SURFACE, markeredgewidth=1.5, label=SCHEME_LABELS[scheme])
+        ax.text(x[-1] + 0.12, sub["pearson"].iloc[-1], f"{sub['pearson'].iloc[-1]:.2f}",
+                va="center", fontsize=9, color=INK)
+    ax.set_xticks(x, labels)
+    ax.set_xlim(-0.3, len(ladder) - 0.5)
+    ax.set_ylabel("Pearson r")
+    ax.grid(axis="x", visible=False)
+    ax.legend(loc="upper left", bbox_to_anchor=(0, -0.2), ncol=len(schemes))
+    ax.set_title("What each data source adds", pad=22)
+    _subtitle(ax, "LightGBM, cumulative feature groups, cross-validated Pearson r per split")
+    _save(fig, paths, "ml_04_ablation")
 
 
 def run(cfg: dict, paths: Paths) -> None:
@@ -386,9 +450,11 @@ def run(cfg: dict, paths: Paths) -> None:
         lambda: fig_lineage(paths),
         lambda: fig_coverage(paths),
         lambda: fig_top_pairs(paths),
+        lambda: fig_study(paths),
         lambda: fig_cell_landscape(paths),
         lambda: fig_feature_families(paths),
         lambda: fig_pred_vs_obs(paths),
+        lambda: fig_ablation(paths),
     ]
     ceiling = None
     try:

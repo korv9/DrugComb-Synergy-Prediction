@@ -66,6 +66,7 @@ def build_report(paths: Paths) -> str:
         ("an_05_screen_coverage", "Screen coverage"),
         ("an_06_top_pairs", "Top synergistic pairs"),
         ("an_07_cell_landscape", "Cell-line landscape"),
+        ("an_08_synergy_by_study", "Synergy by study"),
     ]:
         out.append(_fig(paths, name, alt))
 
@@ -81,6 +82,7 @@ def build_report(paths: Paths) -> str:
         out += [_md_table(t), ""]
         out.append(_fig(paths, "ml_02_feature_families", "Feature families"))
         out.append(_fig(paths, "ml_03_pred_vs_obs", "Predicted vs observed"))
+        out.append(_fig(paths, "ml_04_ablation", "Ablation"))
     return "\n".join(out)
 
 

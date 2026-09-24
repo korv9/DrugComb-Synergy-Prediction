@@ -60,3 +60,27 @@ def test_figures_and_report(pipeline):
                  "an_02_replicate_agreement", "ml_01_performance_by_split"]:
         assert name in pngs
     assert "Modelling" in (paths.reports / "REPORT.md").read_text()
+
+
+def test_study_and_monotherapy(pipeline):
+    _, paths = pipeline
+    fact = pd.read_parquet(paths.fact)
+    assert {"ONEIL", "ALMANAC", "unknown"} <= set(fact["study"])
+    known = fact["study"] != "unknown"
+    assert fact.loc[known, "mono_inh_max_1"].notna().mean() > 0.95
+    assert fact.loc[~known, "mono_inh_max_1"].isna().all()
+
+
+def test_target_features(pipeline):
+    _, paths = pipeline
+    t = pd.read_parquet(paths.processed / "drug_targets.parquet")
+    assert t["drug_key"].nunique() >= 10
+    dc = pd.read_parquet(paths.processed / "drug_cell_targets.parquet")
+    assert dc[["tgt_expr", "tgt_dep", "tgt_mut"]].notna().any().all()
+
+
+def test_ablation_models(pipeline):
+    _, paths = pipeline
+    m = pd.read_csv(paths.tables / "metrics.csv")
+    assert {"lgbm_study", "lgbm_mono", "lgbm_all", "lgbm_all_no_history"} <= set(m["model"])
+    assert (paths.figures / "ml_04_ablation.png").exists()

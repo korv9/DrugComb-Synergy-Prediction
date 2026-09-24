@@ -15,7 +15,12 @@ there and still records their checksums.
 | DrugCombDB | `drug_chemical_info.csv` | `data/raw/drugcombdb/` | Drug name → PubChem CID and SMILES |
 | DepMap | `Model.csv` | `data/raw/depmap/` | Cell-line identifiers, lineage, disease |
 | DepMap | `OmicsExpressionProteinCodingGenesTPMLogp1.csv` | `data/raw/depmap/` | RNA-seq log2(TPM+1), models × genes |
-| PubChem (API) | – | `data/interim/pubchem_cache.json` | Fallback name → CID → SMILES lookups |
+| DrugCombDB | `drugcombs_response.csv` | `data/raw/drugcombdb/` | Dose-response matrices: source study + single-agent responses |
+| DrugCombDB | `drug_protein_links.tsv` | `data/raw/drugcombdb/` | STITCH drug–protein links (targets) |
+| DepMap | `CRISPRGeneEffect.csv` | `data/raw/depmap/` | Chronos gene dependency, models × genes |
+| DepMap | `OmicsSomaticMutationsMatrixDamaging.csv` | `data/raw/depmap/` | Damaging somatic mutations, models × genes |
+| PubChem (API) | – | `data/interim/pubchem_cache.json` | Name → CID → SMILES, display names, same-connectivity CIDs |
+| mygene.info (API) | – | `data/interim/ensp_symbol.json` | Ensembl protein → gene symbol |
 
 ## DrugCombDB
 
@@ -32,6 +37,19 @@ there and still records their checksums.
   IDs, NSC numbers. It also includes *Plasmodium falciparum* strains (3D7, DD2,
   HB3) from anti-malaria screens. Those are excluded through
   `configs/cell_line_aliases.csv`.
+* `drugcombs_response.csv` (≈ 690 MB, 6.1 M wells) has every well of every
+  combination block: `BlockID, Row, Col, DrugRow, DrugCol, ConcRow, ConcCol,
+  Response, …, source`. `BlockID` equals `ID` in `drugcombs_scored.csv`, and
+  `DrugRow` is `Drug1` (verified: 98.5 % exact name match; the rest differ only
+  in escaping). It covers IDs 1–311 724 from **ALMANAC, ONEIL and CLOUD**, all
+  read out as % viability. The remaining 28 % of scored rows come from screens
+  without published matrices; their study is recorded as `unknown` and they
+  have no monotherapy features.
+* `drug_protein_links.tsv` (≈ 745 MB) is the STITCH chemical–protein network.
+  The pipeline keeps links with `combined_score ≥ 700` that are backed by
+  experimental or database evidence (not text mining alone). STITCH keys
+  chemicals by flat (`CIDm`) or stereo (`CIDs`) PubChem CIDs, so each drug's
+  CIDs are expanded to all CIDs with the same connectivity before joining.
 * Check the site's terms of use before redistributing any derived table.
 
 ## DepMap
@@ -58,8 +76,14 @@ every answer, so a re-run makes no new requests. PubChem renamed its SMILES
 properties in 2025 (`IsomericSMILES` → `SMILES`, `CanonicalSMILES` →
 `ConnectivitySMILES`), and the client accepts both.
 
+## mygene.info
+
+Maps STITCH's Ensembl protein IDs (`ENSP…`) to HGNC gene symbols, which is
+how DepMap names its gene columns. Batched POST requests are cached in
+`data/interim/ensp_symbol.json`.
+
 ## Network access
 
 The pipeline needs outbound HTTP(S) to `drugcombdb.denglab.org`,
-`api.figshare.com` and `ndownloader.figshare.com` (which redirect to S3), and
-`pubchem.ncbi.nlm.nih.gov`.
+`api.figshare.com` and `ndownloader.figshare.com` (which redirect to S3),
+`pubchem.ncbi.nlm.nih.gov` and `mygene.info`.

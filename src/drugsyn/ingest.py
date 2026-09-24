@@ -18,6 +18,7 @@ SCORES = ["zip", "bliss", "loewe", "hsa"]
 
 # DrugCombDB header -> staging name (matched case-insensitively, ignoring spaces)
 COLUMN_ALIASES = {
+    "id": "block_id",  # = BlockID in drugcombs_response.csv
     "drug1": "drug_a_raw",
     "drug2": "drug_b_raw",
     "cellline": "cell_raw",
@@ -66,6 +67,9 @@ def stage_measurements(raw: pd.DataFrame, zip_range=(-100, 100)) -> tuple[pd.Dat
     funnel = [{"step": "raw rows", "rows": len(raw)}]
     df = _rename(raw).copy()
     df.insert(0, "measurement_id", np.arange(len(df), dtype=np.int64))
+    if "block_id" not in df:
+        df["block_id"] = df["measurement_id"] + 1
+    df["block_id"] = pd.to_numeric(df["block_id"], errors="coerce").astype("Int64")
 
     for col in SCORES:
         if col in df:

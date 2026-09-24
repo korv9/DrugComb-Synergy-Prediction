@@ -9,6 +9,8 @@ sources:
     files:
       scored: drugcombs_scored.csv
       drug_info: drug_chemical_info.csv
+      response: drugcombs_response.csv       # dose-response matrices + source study
+      protein_links: drug_protein_links.tsv  # STITCH drug-protein links
   depmap:
     # Default: the official Broad release on Figshare+ (CC BY 4.0), pinned for
     # reproducibility. "DepMap 24Q4 Public", doi:10.25452/figshare.plus.27993248.v1
@@ -21,6 +23,8 @@ sources:
     files:
       models: Model.csv
       expression: OmicsExpressionProteinCodingGenesTPMLogp1.csv
+      crispr: CRISPRGeneEffect.csv
+      mutations: OmicsSomaticMutationsMatrixDamaging.csv
   pubchem:
     enabled: true            # fallback for drugs DrugCombDB gives no SMILES for
     base_url: https://pubchem.ncbi.nlm.nih.gov/rest/pug
@@ -37,6 +41,9 @@ features:
   rna_top_var_genes: 5000
   rna_pca_components: 32
   target_encoding_smoothing: 20
+  target_min_score: 700      # STITCH combined score, experimental or database evidence required
+  mechanism_components: 16
+  target_top_k: 10           # strongest targets used for expression/dependency/mutation
 
 model:
   seed: 42
@@ -44,6 +51,15 @@ model:
   eval_folds: 3              # evaluate the first k folds of each scheme (compute budget)
   max_rows: null             # subsample the fact table for quick runs, e.g. 50000
   splits: [random, cold_pair, cold_drug, cold_cell]
+  # LightGBM variants = cumulative ablation ladder over feature groups
+  # (chem, bio, history, study, mono, targets - see features.GROUPS)
+  feature_sets:
+    lgbm_chem_bio: [chem, bio]
+    lgbm_full: [chem, bio, history]
+    lgbm_study: [chem, bio, history, study]
+    lgbm_mono: [chem, bio, history, study, mono]
+    lgbm_all: [chem, bio, history, study, mono, targets]
+    lgbm_all_no_history: [chem, bio, study, mono, targets]
   lgbm:
     n_estimators: 800
     learning_rate: 0.05

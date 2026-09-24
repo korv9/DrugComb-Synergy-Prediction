@@ -27,7 +27,26 @@ FAMILIES = {
     "lineage": "Biology: tissue lineage",
     "te_": "Screen history: in-fold mean ZIP",
     "n_": "Screen history: in-fold counts",
+    "study": "Context: source study",
+    "mono_": "Monotherapy response",
+    "tgt_": "Targets in the cell line",
+    "mech_": "Mechanism: target embedding",
 }
+
+# prefixes making up each named feature group (see configs/default.yaml: model.feature_sets)
+GROUPS = {
+    "chem": ["fps_", "chem_"],
+    "bio": ["rna_pc", "lineage"],
+    "history": ["te_", "n_"],
+    "study": ["study"],
+    "mono": ["mono_"],
+    "targets": ["tgt_", "mech_"],
+}
+
+
+def select(columns, groups: list[str]) -> list[str]:
+    prefixes = tuple(p for g in groups for p in GROUPS[g])
+    return [c for c in columns if c.startswith(prefixes)]
 
 
 def family(col: str) -> str:
@@ -41,9 +60,62 @@ def tanimoto(a: np.ndarray, b: np.ndarray) -> np.ndarray:
         return np.where(union > 0, inter / union, np.nan)
 
 
+def _pair(out: dict, name: str, a: np.ndarray, b: np.ndarray) -> None:
+    """Order-invariant summary of a per-drug value."""
+    out[f"{name}_min"] = np.fmin(a, b)
+    out[f"{name}_max"] = np.fmax(a, b)
+
+
+def context_features(fact: pd.DataFrame, dim_cell: pd.DataFrame,
+                     mechanism: pd.DataFrame | None = None,
+                     drug_cell: pd.DataFrame | None = None) -> dict:
+    """Study, monotherapy and target features (all label-free)."""
+    out = {}
+    if "study" in fact:
+        out["study"] = pd.Categorical(fact["study"].fillna("unknown"))
+
+    if "mono_inh_max_1" in fact:
+        a = fact["mono_inh_max_1"].to_numpy(np.float32)
+        b = fact["mono_inh_max_2"].to_numpy(np.float32)
+        _pair(out, "mono_inh_max", a, b)
+        _pair(out, "mono_inh_mean", fact["mono_inh_mean_1"].to_numpy(np.float32),
+              fact["mono_inh_mean_2"].to_numpy(np.float32))
+        fa, fb = np.clip(a / 100, 0, 1), np.clip(b / 100, 0, 1)
+        out["mono_bliss_expected"] = 100 * (fa + fb - fa * fb)  # independent action
+        out["mono_hsa_expected"] = np.fmax(a, b)                # highest single agent
+        out["mono_headroom"] = 100 - out["mono_bliss_expected"]  # room left for synergy
+
+    if mechanism is not None:
+        mech = mechanism.set_index("drug_key")
+        m1 = mech.reindex(fact["drug_1"]).to_numpy(np.float32)
+        m2 = mech.reindex(fact["drug_2"]).to_numpy(np.float32)
+        for i, col in enumerate(mech.columns):
+            if col == "n_targets":
+                _pair(out, "tgt_n", np.log1p(m1[:, i]), np.log1p(m2[:, i]))
+            else:
+                out[f"{col}_sum"] = m1[:, i] + m2[:, i]
+                out[f"{col}_absdiff"] = np.abs(m1[:, i] - m2[:, i])
+        emb = [c for c in mech.columns if c.startswith("mech_")]
+        e1, e2 = mech.reindex(fact["drug_1"])[emb].to_numpy(), \
+            mech.reindex(fact["drug_2"])[emb].to_numpy()
+        with np.errstate(invalid="ignore", divide="ignore"):
+            cos = (e1 * e2).sum(1) / (np.linalg.norm(e1, axis=1) * np.linalg.norm(e2, axis=1))
+        out["mech_cosine"] = cos.astype(np.float32)
+
+    if drug_cell is not None:
+        model = fact["cell_key"].map(dim_cell.set_index("cell_key")["model_id"])
+        dc = drug_cell.set_index(["drug_key", "model_id"])
+        for col in [c for c in ("tgt_expr", "tgt_dep", "tgt_mut") if c in dc]:
+            v1 = dc[col].reindex(pd.MultiIndex.from_arrays([fact["drug_1"], model]))
+            v2 = dc[col].reindex(pd.MultiIndex.from_arrays([fact["drug_2"], model]))
+            _pair(out, col, v1.to_numpy(np.float32), v2.to_numpy(np.float32))
+    return out
+
+
 def static_features(fact: pd.DataFrame, dim_drug: pd.DataFrame, fps: pd.DataFrame,
                     dim_cell: pd.DataFrame, rna: pd.DataFrame,
-                    min_bit_freq: float = 0.01) -> pd.DataFrame:
+                    min_bit_freq: float = 0.01, mechanism: pd.DataFrame | None = None,
+                    drug_cell: pd.DataFrame | None = None) -> pd.DataFrame:
     """Label-free features for every row of the fact table."""
     n = len(fact)
     out = {}
@@ -84,6 +156,7 @@ def static_features(fact: pd.DataFrame, dim_drug: pd.DataFrame, fps: pd.DataFram
     for col in rna_idx.columns:
         out[col] = rna_rows[col].to_numpy(np.float32)
     out["lineage"] = pd.Categorical(fact["cell_key"].map(cell["lineage"]).fillna("Unknown"))
+    out.update(context_features(fact, dim_cell, mechanism, drug_cell))
 
     feats = pd.DataFrame(out, index=fact.index)
     return pd.concat([feats, pd.DataFrame(fp_sum, columns=fp_cols, index=fact.index)], axis=1)

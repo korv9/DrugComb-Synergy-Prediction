@@ -6,6 +6,7 @@ pipeline can be exercised end-to-end without network access.
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import numpy as np
@@ -106,3 +107,51 @@ def write_raw(root: Path, seed: int = 0, n_rows: int = 3000) -> None:
     expr_df = pd.DataFrame(expr.clip(0).round(4), columns=genes, index=model_df["ModelID"])
     expr_df.index.name = None
     expr_df.to_csv(root / "depmap" / "OmicsExpressionProteinCodingGenesTPMLogp1.csv")
+
+    # CRISPR gene effect + damaging-mutation matrix (same layout as expression)
+    crispr = pd.DataFrame(rng.normal(-0.2, 0.4, expr.shape).round(3), columns=genes,
+                          index=model_df["ModelID"])
+    crispr.index.name = "ModelID"
+    crispr.to_csv(root / "depmap" / "CRISPRGeneEffect.csv")
+    mut = pd.DataFrame((rng.random(expr.shape) < 0.05).astype(int), columns=genes,
+                       index=model_df["ModelID"])
+    mut.index.name = None
+    mut.to_csv(root / "depmap" / "OmicsSomaticMutationsMatrixDamaging.csv")
+
+    write_response(root, scored, rng)
+    write_targets(root, rng)
+
+
+def write_response(root: Path, scored: pd.DataFrame, rng) -> None:
+    """4x4 dose-response blocks (% viability) for the first 80 % of scored IDs."""
+    ids = scored.drop_duplicates("ID")
+    ids = ids[ids["ID"] <= int(ids["ID"].max() * 0.8)]
+    conc = [0, 0.1, 1, 10]
+    rows = []
+    for _, r in ids.iterrows():
+        study = "ONEIL" if r["ID"] % 2 else "ALMANAC"
+        pot_a, pot_b = rng.uniform(0.1, 5, 2)
+        for i, ca in enumerate(conc):
+            for j, cb in enumerate(conc):
+                inh = 1 - (1 - ca / (ca + pot_a)) * (1 - cb / (cb + pot_b))
+                rows.append((r["ID"], i + 1, j + 1, r["Drug1"], r["Drug2"], ca, cb,
+                             100 * (1 - inh) + rng.normal(0, 2), "uM", "uM", study))
+    pd.DataFrame(rows, columns=["BlockID", "Row", "Col", "DrugRow", "DrugCol", "ConcRow",
+                                "ConcCol", "Response", "ConcRowUnit", "ConcColUnit", "source"]) \
+        .to_csv(root / "drugcombdb" / "drugcombs_response.csv", index=False)
+
+
+def write_targets(root: Path, rng) -> None:
+    """STITCH-style links for the synthetic CIDs + a pre-filled ENSP->symbol cache."""
+    rows, symbols = [], {}
+    for i in range(len(DRUGS)):
+        for g in rng.choice(300, 4, replace=False):
+            ensp = f"ENSP{g:011d}"
+            symbols[ensp] = f"GENE{g}"
+            rows.append((f"CIDs{1000 + i:08d}", f"9606.{ensp}", 800, 0, 900, 0, 950))
+    pd.DataFrame(rows, columns=["chemical", "protein", "experimental", "prediction",
+                                "database", "textmining", "combined_score"]) \
+        .to_csv(root / "drugcombdb" / "drug_protein_links.tsv", sep="\t", index=False)
+    interim = root.parent / "interim"
+    interim.mkdir(parents=True, exist_ok=True)
+    (interim / "ensp_symbol.json").write_text(json.dumps(symbols))

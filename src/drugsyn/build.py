@@ -18,13 +18,28 @@ from .ingest import SCORES
 
 log = logging.getLogger(__name__)
 
-KEY = ["drug_1", "drug_2", "cell_key"]
+KEY = ["drug_1", "drug_2", "cell_key", "study"]
+MONO = ["mono_inh_mean", "mono_inh_max"]
 
 
-def build_fact(meas: pd.DataFrame, bridge: pd.DataFrame, dim_cell: pd.DataFrame, cutoff: float):
-    """Return (fact, replicate_pairs, funnel_steps)."""
+def build_fact(meas: pd.DataFrame, bridge: pd.DataFrame, dim_cell: pd.DataFrame, cutoff: float,
+               blocks: pd.DataFrame | None = None):
+    """Return (fact, replicate_pairs, funnel_steps).
+
+    ``blocks`` (from the monotherapy stage) adds the source study and the
+    single-agent responses of Drug1 (matrix row) and Drug2 (matrix column).
+    """
     name2key = dict(zip(bridge["name_norm"], bridge["drug_key"]))
     df = meas.assign(key_a=meas["drug_a"].map(name2key), key_b=meas["drug_b"].map(name2key))
+    if blocks is not None:
+        df = df.merge(blocks, on="block_id", how="left")
+    else:
+        df["study"] = np.nan
+    df["study"] = df["study"].astype(object).fillna("unknown").astype(str)
+    for m in MONO:
+        for side in ("row", "col"):
+            if f"{m}_{side}" not in df:
+                df[f"{m}_{side}"] = np.nan
     funnel = []
 
     df = df[df["key_a"] != df["key_b"]]
@@ -38,9 +53,12 @@ def build_fact(meas: pd.DataFrame, bridge: pd.DataFrame, dim_cell: pd.DataFrame,
     df = df.assign(
         drug_1=np.where(swap, df["key_b"], df["key_a"]),
         drug_2=np.where(swap, df["key_a"], df["key_b"]),
+        **{f"{m}_1": np.where(swap, df[f"{m}_col"], df[f"{m}_row"]) for m in MONO},
+        **{f"{m}_2": np.where(swap, df[f"{m}_row"], df[f"{m}_col"]) for m in MONO},
     )
 
     agg = {s: (s, "mean") for s in SCORES}
+    agg.update({f"{m}_{i}": (f"{m}_{i}", "mean") for m in MONO for i in (1, 2)})
     fact = df.groupby(KEY, sort=False).agg(
         **agg,
         zip_std=("zip", "std"),
@@ -51,7 +69,8 @@ def build_fact(meas: pd.DataFrame, bridge: pd.DataFrame, dim_cell: pd.DataFrame,
         fact["zip"], [-np.inf, -cutoff, cutoff, np.inf],
         labels=["antagonistic", "additive", "synergistic"],
     ).astype(str)
-    funnel.append({"step": "unique (pair, cell line) after replicate mean", "rows": len(fact)})
+    funnel.append({"step": "unique (pair, cell line, study) after replicate mean",
+                   "rows": len(fact)})
 
     reps = (
         df.sort_values("measurement_id")
@@ -70,7 +89,7 @@ def quality_checks(fact: pd.DataFrame, dim_drug: pd.DataFrame,
                    dim_cell: pd.DataFrame) -> pd.DataFrame:
     """Declarative data-quality expectations; failures are reported, not raised."""
     checks = [
-        ("fact grain is unique (drug_1, drug_2, cell_key)",
+        ("fact grain is unique (drug_1, drug_2, cell_key, study)",
          not fact.duplicated(KEY).any(), f"{int(fact.duplicated(KEY).sum())} duplicates"),
         ("drug pairs are canonically ordered", bool((fact["drug_1"] < fact["drug_2"]).all()), ""),
         ("no self-combinations", bool((fact["drug_1"] != fact["drug_2"]).all()), ""),
@@ -117,7 +136,12 @@ def run(cfg: dict, paths: Paths) -> None:
     dim_drug = pd.read_parquet(paths.dim_drug)
     dim_cell = pd.read_parquet(paths.dim_cell)
 
-    fact, reps, funnel = build_fact(meas, bridge, dim_cell, cfg["clean"]["synergy_cutoff"])
+    block_path = paths.processed / "block_monotherapy.parquet"
+    blocks = pd.read_parquet(block_path) if block_path.exists() else None
+    if blocks is None:
+        log.warning("%s missing - no study labels or monotherapy features", block_path)
+    fact, reps, funnel = build_fact(meas, bridge, dim_cell, cfg["clean"]["synergy_cutoff"],
+                                    blocks)
     fact.to_parquet(paths.fact, index=False)
     reps.to_parquet(paths.replicates, index=False)
 
